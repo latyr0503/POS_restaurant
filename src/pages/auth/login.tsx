@@ -2,7 +2,11 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import type { FormLogin } from "@/types/auth"
+<<<<<<< dev-Tacko
+import { ShoppingCart, Check, Lock, Mail } from "lucide-react"
+=======
 import { ShoppingCart, Check, Lock, EyeOff, Eye, Mail } from "lucide-react"
+>>>>>>> main
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -62,6 +66,7 @@ const navigate = useNavigate();
               Icon={Mail}
               value={form.email}
               onChange={handlechange}
+              Icon={Mail}
               type="email"
               placeholder="Adresse email"
             />
