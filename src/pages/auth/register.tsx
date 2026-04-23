@@ -1,20 +1,22 @@
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import type { FormLogin } from "@/types/auth"
+import React from "react"
 import { ShoppingCart, Check, Lock, Mail } from "lucide-react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "sonner"
 
-export default function Login() {
-  const [form, setform] = useState<FormLogin>({
+export default function Register() {
+  const [form, setForm] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
+    conditions: false,
   })
 
-  const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setform({
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({
       ...form,
       [e.target.name]: e.target.value,
     })
@@ -22,7 +24,15 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    toast.success("Connexion reussie")
+    if (form.password !== form.confirmPassword) {
+      toast.error("Les mot de passe n correspondent op")
+      return
+    }
+    toast.success("Inscription réussie")
+    if (!form.conditions) {
+      toast.error("Veuillez accepter les conditions d'utilisation")
+      return
+    }
   }
 
   return (
@@ -31,7 +41,6 @@ export default function Login() {
         <div className="w-1/2 justify-center rounded-xl border-r border-gray-100 bg-white p-8 md:flex">
           <img src="/images/login-rafiki.svg" alt="" />
         </div>
-
         <div className="flex flex-col justify-center gap-8 px-28 py-10 md:w-1/2">
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -46,14 +55,14 @@ export default function Login() {
           </div>
 
           <h2 className="text-3xl font-bold text-gray-800">
-            Bienvenue dans notre plateforme !
+            Créer un compte !
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-8">
             <Input
               name="email"
               value={form.email}
-              onChange={handlechange}
+              onChange={handleChange}
               Icon={Mail}
               type="email"
               placeholder="Adresse email"
@@ -61,54 +70,49 @@ export default function Login() {
             <Input
               name="password"
               value={form.password}
-              onChange={handlechange}
+              onChange={handleChange}
               Icon={Lock}
               type="password"
               placeholder="Mot de passe"
             />
-
-            <div className="-mt-2 text-right">
-              <Button variant="link">
-                <Link to="/forgot-password">Mot de passe oublié ?</Link>
-              </Button>
+            <Input
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              Icon={Lock}
+              type="password"
+              placeholder="Confirmer le mot de passe"
+            />
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="conditions"
+                checked={form.conditions}
+                onChange={(e) =>
+                  setForm({ ...form, conditions: e.target.checked })
+                }
+                className="h-4 w-4 cursor-pointer accent-primary"
+              />
+              <label
+                htmlFor="conditions"
+                className="cursor-pointer text-sm text-gray-500"
+              >
+                J'accepte les{" "}
+                <span className="cursor-pointer font-medium text-primary hover:underline">
+                  conditions d'utilisation
+                </span>
+              </label>
             </div>
-            <Button className="w-full">Se connecter</Button>
+            <Button className="w-full">S'inscrire</Button>
           </form>
 
-          <div className="flex items-center gap-3">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs text-gray-400">ou</span>
-            <div className="h-px flex-1 bg-gray-200" />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" className="w-full">
-              <img
-                className="size-4"
-                src="/images/google-icon.png"
-                alt="Google"
-              />
-              <span>Google</span>
-            </Button>
-            <Button variant="outline" className="w-full">
-              <img
-                className="size-4"
-                src="/images/facebook-icon.png"
-                alt="Facebook"
-              />
-              <span>Facebook</span>
-            </Button>
-          </div>
           <p className="text-center text-sm text-gray-400">
-            Pas de compte ?{" "}
+            Déjà un compte ?{" "}
             <Link
-              className={cn(
-                buttonVariants({
-                  variant: "link",
-                })
-              )}
-              to="/register"
+              className={cn(buttonVariants({ variant: "link" }))}
+              to="/login"
             >
-              S'inscrire
+              Se connecter
             </Link>
           </p>
         </div>
