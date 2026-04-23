@@ -2,7 +2,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import type { FormLogin } from "@/types/auth"
-import { ShoppingCart, Check, Lock, EyeOff, Eye } from "lucide-react"
+import { ShoppingCart, Check, Lock, EyeOff, Eye, Mail } from "lucide-react"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -59,6 +59,7 @@ const navigate = useNavigate();
           <form onSubmit={handleSubmit} className="space-y-5">
             <Input
               name="email"
+              Icon={Mail}
               value={form.email}
               onChange={handlechange}
               type="email"
