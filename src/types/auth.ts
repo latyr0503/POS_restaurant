@@ -9,4 +9,6 @@ export interface FormRegister extends FormLogin {
   telephone?: string
   role?: string
   adresse?: string
+  conditions?: boolean
+  confirmPassword: string
 }
