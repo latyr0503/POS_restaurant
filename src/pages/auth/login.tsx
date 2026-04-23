@@ -2,12 +2,19 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import type { FormLogin } from "@/types/auth"
+<<<<<<< dev-Tacko
 import { ShoppingCart, Check, Lock, Mail } from "lucide-react"
+=======
+import { ShoppingCart, Check, Lock, EyeOff, Eye, Mail } from "lucide-react"
+>>>>>>> main
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 export default function Login() {
+const [Password, setPassword] = useState(false)
+const navigate = useNavigate();
+
   const [form, setform] = useState<FormLogin>({
     email: "",
     password: "",
@@ -19,6 +26,10 @@ export default function Login() {
       [e.target.name]: e.target.value,
     })
   }
+
+  // localStorage.setItem("user", JSON.stringify(form));
+  // toast.success("Connexion reussie !");
+  // navigate("/auth/login");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -45,28 +56,36 @@ export default function Login() {
             <span className="text-xl font-bold text-primary">JAAYKAT</span>
           </div>
 
-          <h2 className="text-3xl font-bold text-gray-800">
+          <h2 className="font-quicksand text-3xl font-bold text-gray-800">
             Bienvenue dans notre plateforme !
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <Input
               name="email"
+              Icon={Mail}
               value={form.email}
               onChange={handlechange}
               Icon={Mail}
               type="email"
               placeholder="Adresse email"
             />
+            <div className="relative">
             <Input
               name="password"
               value={form.password}
               onChange={handlechange}
               Icon={Lock}
-              type="password"
+              type={Password ? "text" : "password"}
               placeholder="Mot de passe"
+              className="w-full px-4 py-2 pr-10 border rounded-lg outline-none "
             />
-
+            <button
+            type="button" onClick={() => setPassword(!Password)}
+            className="absolute top-1/2 right-3 -translate-y-1/2  ">
+              {Password ?  <EyeOff size={20} /> :  <Eye size={20} />}
+            </button>
+             </div>
             <div className="-mt-2 text-right">
               <Button variant="link">
                 <Link to="/forgot-password">Mot de passe oublié ?</Link>
