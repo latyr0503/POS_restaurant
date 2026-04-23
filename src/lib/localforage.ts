@@ -95,6 +95,7 @@ export const STORAGE_KEYS = {
   AUTH_USER: "auth_user",
   AUTH_TOKEN: "auth_token",
   AUTH_REFRESH_TOKEN: "auth_refresh_token",
+  USERS: "users",               // liste de tous les utilisateurs inscrits
 
   // Commandes
   CART: "cart",
