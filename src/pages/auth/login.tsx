@@ -67,9 +67,7 @@ export default function Login() {
           Bienvenue dans notre plateforme !
         </h2>
 
-          <h2 className="font-quicksand text-3xl font-bold text-gray-800">
-            Bienvenue dans notre plateforme !
-          </h2>
+
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <Input
@@ -77,7 +75,6 @@ export default function Login() {
               Icon={Mail}
               value={form.email}
               onChange={handlechange}
-              Icon={Mail}
               type="email"
               placeholder="Adresse email"
             />
@@ -128,32 +125,8 @@ export default function Login() {
               <span>Facebook</span>
             </Button>
           </div>
-          <Button className="w-full">Se connecter</Button>
-        </form>
 
-        <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-gray-200" />
-          <span className="text-xs text-gray-400">ou</span>
-          <div className="h-px flex-1 bg-gray-200" />
-        </div>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <Button variant="outline" className="w-full">
-            <img
-              className="size-4"
-              src="/images/google-icon.png"
-              alt="Google"
-            />
-            <span>Google</span>
-          </Button>
-          <Button variant="outline" className="w-full">
-            <img
-              className="size-4"
-              src="/images/facebook-icon.png"
-              alt="Facebook"
-            />
-            <span>Facebook</span>
-          </Button>
-        </div>
+
         <p className="text-center text-sm text-gray-400">
           Pas de compte ?{" "}
           <Link
