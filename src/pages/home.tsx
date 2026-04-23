@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils"
 import { Check, ShoppingCart } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { slideImages } from "@/data"
+import { slideImages } from "@/lib/data"
 
 export default function Home() {
-  const [slide, setSlide] = useState(0)
+  const [slide, setSlide] = useState<number>(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,8 +20,7 @@ export default function Home() {
       {slideImages.map((img, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 
-            ${index === slide ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${index === slide ? "opacity-100" : "opacity-0"}`}
           style={{ backgroundImage: `url('${img}')` }}
         />
       ))}
@@ -58,7 +57,7 @@ export default function Home() {
         {slideImages.map((_, index) => (
           <span
             key={index}
-            className={`h-2 rounded-full bg-primary transition-all duration-500 ${index === slide ? "w-6" : "w-2"}`}
+            className={`h-2 rounded-full transition-all duration-500 ${index === slide ? "w-6 bg-primary" : "w-2 bg-white"}`}
           />
         ))}
       </div>
