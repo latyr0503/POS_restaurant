@@ -77,23 +77,7 @@ export default function Register() {
   }
 
   return (
-    <section className="flex min-h-screen w-full items-center justify-center bg-gray-50">
-      <div className="flex w-full rounded-lg">
-        <div className="hidden w-1/2 justify-center rounded-xl border-r border-gray-100 bg-white p-8 md:flex">
-          <img src="/images/login-rafiki.svg" alt="" />
-        </div>
-        <div className="flex w-full flex-col justify-center gap-8 px-5 py-10 md:w-1/2 md:px-28">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <ShoppingCart className="h-4 w-4 text-white" strokeWidth={3} />
-              </div>
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow-sm">
-                <Check className="h-3 text-primary" strokeWidth={4} />
-              </span>
-            </div>
-            <span className="text-xl font-bold text-primary">JAAYKAT</span>
-          </div>
+   <div className="space-y-10">
 
           <h2 className="text-3xl font-bold text-gray-800">
             Créer un compte !
@@ -185,7 +169,6 @@ export default function Register() {
             </Link>
           </p>
         </div>
-      </div>
-    </section>
+      
   )
 }
