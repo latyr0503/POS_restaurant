@@ -12,22 +12,22 @@ import PasswordChanged from "./pages/auth/password-changed"
 
 export function App() {
   return (
-     <>
-    <BrowserRouter>
-      <Toaster position="top-center" richColors duration={5000} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-       
+    <>
+      <BrowserRouter>
+        <Toaster position="top-center" richColors duration={5000} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+
           <Route element={<AuthLayout />}>
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-           <Route path="/password-changed" element={<PasswordChanged />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/password-changed" element={<PasswordChanged />} />
             <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="/register" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
