@@ -1,14 +1,16 @@
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { authStore, STORAGE_KEYS } from "@/lib/localforage"
 import { cn } from "@/lib/utils"
 import React from "react"
 import { ShoppingCart, Check, Lock, Mail, User2, Phone } from "lucide-react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import type { FormRegister } from "@/types/auth"
 
 export default function Register() {
+  const navigate = useNavigate()
   const [form, setForm] = useState<FormRegister>({
     nom: "",
     prenom: "",
@@ -28,28 +30,59 @@ export default function Register() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // ── Validations ────────────────────────────────────────────────────────
+    if (!form.conditions) {
+      toast.error("Veuillez accepter les conditions d'utilisation")
+      return
+    }
+    if (!form.email || !form.password || !form.telephone) {
+      toast.error("Veuillez remplir tous les champs obligatoires")
+      return
+    }
     if (form.password !== form.confirmPassword) {
       toast.error("Les mots de passe ne correspondent pas")
       return
     }
-    console.log(form);
-    
-    toast.success("Inscription réussie")
-    if (!form.conditions) {
-      toast.error("Veuillez accepter les conditions d'utilisation")
-      return
+
+    try {
+      // ── Récupérer la liste existante ───────────────────────────────────
+      const existing = await authStore.getItem<FormRegister[]>(
+        STORAGE_KEYS.USERS
+      )
+      const users: FormRegister[] = existing ?? []
+
+      // ── Vérifier si l'email est déjà pris ─────────────────────────────
+      const emailExists = users.some(
+        (u) => u.email.toLowerCase() === form.email.toLowerCase()
+      )
+      if (emailExists) {
+        toast.error("Un compte avec cet email existe déjà")
+        return
+      } 
+
+      // ── Sauvegarder le nouvel utilisateur ─────────────────────────────
+      const { confirmPassword: _confirmPassword, ...userToSave } = form
+      users.push(userToSave)
+      await authStore.setItem(STORAGE_KEYS.USERS, users)
+
+      toast.success("Inscription réussie ! Vous pouvez vous connecter.")
+      navigate("/login")
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error)
+      toast.error("Une erreur est survenue lors de l'inscription")
     }
   }
 
   return (
     <section className="flex min-h-screen w-full items-center justify-center bg-gray-50">
       <div className="flex w-full rounded-lg">
-        <div className="w-1/2 justify-center hidden rounded-xl border-r border-gray-100 bg-white p-8 md:flex">
+        <div className="hidden w-1/2 justify-center rounded-xl border-r border-gray-100 bg-white p-8 md:flex">
           <img src="/images/login-rafiki.svg" alt="" />
         </div>
-        <div className="flex flex-col justify-center gap-8 px-5 py-10 w-full md:px-28 md:w-1/2">
+        <div className="flex w-full flex-col justify-center gap-8 px-5 py-10 md:w-1/2 md:px-28">
           <div className="flex items-center gap-3">
             <div className="relative">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -93,7 +126,7 @@ export default function Register() {
               type="email"
               placeholder="Adresse email"
             />
-             <Input
+            <Input
               name="telephone"
               value={form.telephone}
               onChange={handleChange}
@@ -102,23 +135,22 @@ export default function Register() {
               placeholder="Numero de telephone"
             />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-            <Input
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              Icon={Lock}
-              type="password"
-              placeholder="Mot de passe"
-            />
-            <Input
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              Icon={Lock}
-              type="password"
-              placeholder="Confirmer le mot de passe"
-            />
+              <Input
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                Icon={Lock}
+                type="password"
+                placeholder="Mot de passe"
+              />
+              <Input
+                name="confirmPassword"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                Icon={Lock}
+                type="password"
+                placeholder="Confirmer le mot de passe"
+              />
             </div>
             <div className="flex items-center gap-2">
               <input
