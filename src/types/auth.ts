@@ -12,3 +12,7 @@ export interface FormRegister extends FormLogin {
   conditions?: boolean
   confirmPassword: string
 }
+
+
+
+
