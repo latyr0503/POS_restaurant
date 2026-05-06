@@ -1,4 +1,4 @@
-import { buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/button"
 import { cn } from "@/lib/utils"
 import { Check, ShoppingCart } from "lucide-react"
 import { Link } from "react-router-dom"
