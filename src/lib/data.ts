@@ -1,15 +1,24 @@
-
 import type { ProductType } from "@/types/auth"
+import type { MenuType } from "@/types/menu"
+import {
+  Bell,
+  FileText,
+  Hamburger,
+  House,
+  LayoutDashboard,
+  SendHorizontal,
+  Settings,
+  User,
+} from "lucide-react"
 
 export const slideImages: string[] = [
   "/images/patrimoine-culinaire.jpeg",
   "/images/bg-1.jpeg",
   "/images/bg-2.jpeg",
 ]
-  
+
 export const products: ProductType[] = [
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Classic Burger",
     price: 1500,
@@ -19,7 +28,6 @@ export const products: ProductType[] = [
     image: "/images/Classic Burger.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Chicken Burger",
     price: 1500,
@@ -29,7 +37,6 @@ export const products: ProductType[] = [
     image: "/images/Chicken Burger.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Double Smash",
     price: 2500,
@@ -39,7 +46,6 @@ export const products: ProductType[] = [
     image: "/images/Double Smash.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Hot Dog",
     price: 2000,
@@ -49,7 +55,6 @@ export const products: ProductType[] = [
     image: "/images/Hot Dog.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Pizza Margherita",
     price: 4000,
@@ -59,7 +64,6 @@ export const products: ProductType[] = [
     image: "/images/Pizza Margherita.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Tacos Poulet",
     price: 2500,
@@ -69,7 +73,6 @@ export const products: ProductType[] = [
     image: "/images/Tacos Poulet.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Nuggets x8",
     price: 2500,
@@ -79,7 +82,6 @@ export const products: ProductType[] = [
     image: "/images/Nuggets x8.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "French Fries",
     price: 1500,
@@ -89,7 +91,6 @@ export const products: ProductType[] = [
     image: "/images/French Fries.jpg",
   },
   {
-    
     productid: `ID-${crypto.randomUUID()}`,
     name: "Cheese Sandwich",
     price: 2000,
@@ -97,5 +98,48 @@ export const products: ProductType[] = [
     status: "In Stock",
     description: "Pain grillé, cheddar fondu, jambon",
     image: "/images/Cheese Sandwich.jpg",
+  },
+]
+
+export const menu: MenuType[] = [
+  {
+    name: "Dashboard",
+    link: "/dashboard",
+    icon: House,
+  },
+  {
+    name: "Gestion des Menus",
+    link: "/dashboard/menus",
+    icon: LayoutDashboard,
+  },
+  {
+    name: "Ventes",
+    link: "/dashboard/sales",
+    icon: FileText,
+  },
+  {
+    name: "Gestion des Produits",
+    link: "/dashboard/product",
+    icon: Hamburger,
+  },
+  {
+    name: "Notifications",
+    link: "/dashboard/notifications",
+    icon: Bell,
+  },
+  {
+    name: "Utilisateurs",
+    link: "/dashboard/users",
+    icon: User,
+  },
+  {
+    name: "Historique des commandes",
+    link: "/dashboard/history",
+    icon: SendHorizontal,
+  },
+  {
+    name: "Paramètres",
+    link: "/dashboard/settings",
+    icon: Settings,
   },
 ]

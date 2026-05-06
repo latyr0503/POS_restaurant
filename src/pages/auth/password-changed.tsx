@@ -5,6 +5,8 @@ import { toast } from "sonner"
 export default function PasswordChanged() {
   const navigate = useNavigate()
 
+  const email = localStorage.getItem("email")
+
   return (
     <div className="space-y-10 text-center">
       <h2 className="-ml-20 text-2xl font-bold text-gray-800 md:text-3xl">
@@ -12,7 +14,7 @@ export default function PasswordChanged() {
       </h2>
       <p className="max-w-xl text-xl font-bold text-gray-800">
         Nous avons envoyé un lien de vérification à votre boîte e-mail
-        <span className="text-green-500"> gafdhyvds23@gmail.com</span>
+        <span className="text-green-500"> {email}</span>
       </p>
       <p className="font-bold">
         Clique sur le lien dans votre boîte e-mail et tout est fait

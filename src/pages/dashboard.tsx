@@ -1,13 +1,10 @@
-import type { FormRegister } from "@/types/auth"
-
 export default function Dashboard() {
-  const user:FormRegister = JSON.parse(localStorage.getItem("user") || "{}")
-
- 
   return (
-     <>
-      <h1>fdjnvnsvpzsovnzdpisno</h1>
-    </>
+    <div className="flex h-screen bg-gray-100">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+      laboriosam tempore non omnis, quae asperiores doloribus doloremque illo.
+      Minima vitae esse voluptas facere mollitia aspernatur aut eligendi
+      obcaecati a totam.
+    </div>
   )
 }
-  
