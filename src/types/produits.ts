@@ -6,3 +6,19 @@ export interface Menu {
   description: string,
   image: string,
 }
+
+ export interface PanierItem {
+  menu: Menu
+  quantite: number
+}
+
+
+export interface FormCommandeType {
+  nom: string
+  genre: string
+  adresse: string
+  telephone: string
+  email: string
+  customerId: string
+  menu : Menu[]
+}

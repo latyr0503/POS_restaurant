@@ -24,12 +24,9 @@ export default function CardPanier({ item, ajouterAuPanier, reduireQuantite }: C
         <p className="text-xs font-bold text-primary">{item.menu.prix} FCFA</p>
       </div>
       <div className="flex items-center gap-2">
-        <button
-          onClick={() => reduireQuantite(item.menu.id)}
-          className="flex h-6 w-6 items-center justify-center rounded-full border border-gray-200 text-gray-500"
-        >
-          <Minus className="h-3 w-3" />
-        </button>
+        <button onClick={() => reduireQuantite(item.menu.id)} className="flex h-6 w-6 items-center justify-center rounded-full border border-gray-200 text-gray-500">
+        <Minus className="h-3 w-3" />
+      </button>
         <span className="text-sm font-medium">{item.quantite}</span>
         <button
           onClick={() => ajouterAuPanier(item.menu)}

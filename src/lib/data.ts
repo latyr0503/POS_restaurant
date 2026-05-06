@@ -6,10 +6,6 @@ export const slideImages: string[] = [
   "/images/bg-2.jpeg",
 ]
 
-
-
-
-
 export const menus: Menu[] = [
   {
     id: 1,
@@ -17,7 +13,7 @@ export const menus: Menu[] = [
     prix: 1500,
     note: 4.5,
     description: "Steak haché, cheddar, salade, tomate",
-    image: "public/images/Classic Burger.jpeg",
+    image: "/images/Classic Burger.jpeg",
   },
   {
     id: 2,
@@ -25,7 +21,7 @@ export const menus: Menu[] = [
     prix: 1500,
     note: 4.2,
     description: "Poulet croustillant, mayo, cornichons",
-    image: "public/images/Chicken Burger.jpeg",
+    image: "/images/Chicken Burger.jpeg",
   },
   {
     id: 3,
@@ -33,7 +29,7 @@ export const menus: Menu[] = [
     prix: 2500,
     note: 5.0,
     description: "Double steak, double cheddar, sauce spéciale",
-    image: "public/images/Double Smash.jpeg",
+    image: "/images/Double Smash.jpeg",
   },
   {
     id: 4,
@@ -41,7 +37,7 @@ export const menus: Menu[] = [
     prix: 2000,
     note: 4.0,
     description: "Saucisse grillée, moutarde, ketchup",
-    image: "public/images/Hot Dog.jpeg",
+    image: "/images/Hot Dog.jpeg",
   },
   {
     id: 5,
@@ -49,7 +45,7 @@ export const menus: Menu[] = [
     prix: 4000,
     note: 4.7,
     description: "Mozzarella, tomate, basilic frais",
-    image: "public/images/Pizza Margherita.jpeg",
+    image: "/images/Pizza Margherita.jpeg",
   },
   {
     id: 6,
@@ -57,7 +53,7 @@ export const menus: Menu[] = [
     prix: 2500,
     note: 4.3,
     description: "Poulet grillé, fromage fondu, frites",
-    image: "public/images/Tacos Poulet.jpeg",
+    image: "/images/Tacos Poulet.jpeg",
   },
   {
     id: 7,
@@ -65,7 +61,7 @@ export const menus: Menu[] = [
     prix: 2500,
     note: 4.1,
     description: "Nuggets croustillants, sauce BBQ",
-    image: "public/images/Nuggets x8.jpeg",
+    image: "/images/Nuggets x8.jpeg",
   },
   {
     id: 8,
@@ -73,7 +69,7 @@ export const menus: Menu[] = [
     prix: 1500,
     note: 4.6,
     description: "Frites dorées, sel, ketchup",
-    image: "public/images/French Fries.jpeg",
+    image: "/images/French Fries.jpeg",
   },
   {
     id: 9,
@@ -81,6 +77,6 @@ export const menus: Menu[] = [
     prix: 2000,
     note: 3.8,
     description: "Pain grillé, cheddar fondu, jambon",
-    image: "public/images/Cheese Sandwich.jpeg",
+    image: "/images/Cheese Sandwich.jpeg",
   },
 ]
