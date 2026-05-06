@@ -1,43 +1,69 @@
-import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { Input } from "@/components/ui/input"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+import { Input } from "@/components/input"
+import { Button } from "@/components/button"
 import { Lock } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 export default function ResetPassword() {
   const navigate = useNavigate()
 
-  const [password, setPassword] = useState("")
-  const [confirm, setConfirm] = useState("")
+  const [form, setForm] = useState({
+    password: "",
+    confirmPassword: "",
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!form.password || !form.confirmPassword) {
+      toast.error("Veuillez remplir tous les champs")
+      return
+    }
+
+    if (form.password !== form.confirmPassword) {
+      toast.error("Les mots de passe ne correspondent pas")
+      return
+    }
+
+    toast.success("Mot de passe modifié avec succès")
+    navigate("/password-changed")
+  }
 
   return (
-    <>
-    <div className="space-y-10">
-      <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">Réinitialiser mot de passe</h2>
-      
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          navigate("/password-changed")
-        }}
-        className="space-y-10"
-      >
-        <Input
-         type="password" 
-         value={password} onChange={(e: any) => setPassword(e.target.value)} 
-         placeholder="Nouveau mot de passe" 
-         Icon={Lock}
-         />
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <h2 className="text-2xl font-bold">
+        Réinitialiser le mot de passe
+      </h2>
 
-        <Input type="password"
-         value={confirm} onChange={(e: any) => setConfirm(e.target.value)}
-          placeholder="Confirmer mot de passe"
-          Icon={Lock}
-          />
+      <Input
+        type="password"
+        name="password"
+        placeholder="Nouveau mot de passe"
+        value={form.password}
+        onChange={handleChange}
+        Icon={Lock}
+      />
 
-       <Button className="w-full">Changer mot de passe</Button>
-      </form>
-       </div>
-    </>
+      <Input
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirmer mot de passe"
+        value={form.confirmPassword}
+        onChange={handleChange}
+        Icon={Lock}
+      />
+
+      <Button className="w-full">
+        Changer mot de passe
+      </Button>
+    </form>
   )
 }

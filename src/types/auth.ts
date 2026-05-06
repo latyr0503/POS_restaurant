@@ -1,4 +1,4 @@
-import { products } from './../lib/data';
+
 
 export interface FormLogin {
   email: string
@@ -15,10 +15,12 @@ export interface FormRegister extends FormLogin {
   confirmPassword: string
 }
 
-export interface Product {
-  id: number
+export interface ProductType {
+  productid: string
   name: string
   price: number
+  note: number
   image: string
-  quantity: number
+  status: string
+  description: string
 }

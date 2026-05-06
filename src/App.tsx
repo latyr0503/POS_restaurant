@@ -9,6 +9,8 @@ import AuthLayout from "./Layout/auth-layout"
 import ForgotPassword from "./pages/auth/forgot-password"
 import ResetPassword from "./pages/auth/reset-password"
 import PasswordChanged from "./pages/auth/password-changed"
+import Product from "./pages/auth/product"
+import AppLayout from "./Layout/app-layout"
 
 export function App() {
   return (
@@ -17,7 +19,11 @@ export function App() {
         <Toaster position="top-center" richColors duration={5000} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<AppLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="product" element={<Product />} />
+            
+          </Route>
 
           <Route element={<AuthLayout />}>
             <Route path="/forgot-password" element={<ForgotPassword />} />

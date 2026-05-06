@@ -1,9 +1,9 @@
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button, buttonVariants } from "@/components/button"
+import { Input } from "@/components/input"
 import { authStore, STORAGE_KEYS } from "@/lib/localforage"
 import { cn } from "@/lib/utils"
 import type { FormLogin } from "@/types/auth"
-import { ShoppingCart, Check, Lock, Mail } from "lucide-react"
+import { Lock, Mail } from "lucide-react"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -33,7 +33,13 @@ export default function Login() {
     try {
       // ── Récupérer la liste des utilisateurs inscrits ───────────────────
       const users = await authStore.getItem<
-        Array<{ email: string; password: string; nom?: string; prenom?: string; role?: string }>
+        Array<{
+          email: string
+          password: string
+          nom?: string
+          prenom?: string
+          role?: string
+        }>
       >(STORAGE_KEYS.USERS)
 
       if (!users || users.length === 0) {
@@ -62,7 +68,9 @@ export default function Login() {
       await localStorage.setItem("user", JSON.stringify(sessionUser))
       await localStorage.setItem("token", `token_${Date.now()}`)
 
-      toast.success(`Bienvenue ${sessionUser.prenom ?? sessionUser.nom ?? ""} !`)
+      toast.success(
+        `Bienvenue ${sessionUser.prenom ?? sessionUser.nom ?? ""} !`
+      )
       navigate("/dashboard")
     } catch (error) {
       console.error("Erreur de connexion :", error)
@@ -71,13 +79,11 @@ export default function Login() {
   }
 
   return (
-    
-<>
-       <div className="space-y-10">
+    <>
+      <div className="space-y-10">
         <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
           Bienvenue dans notre plateforme !
         </h2>
-       
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <Input
@@ -142,8 +148,7 @@ export default function Login() {
             S'inscrire
           </Link>
         </p>
-         </div>
-     </>
-   
+      </div>
+    </>
   )
 }

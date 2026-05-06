@@ -24,11 +24,8 @@ export default function AuthLayout() {
           </div>
           <span className="text-xl font-bold text-primary">JAAYKAT</span>
         </div>
-       
-          
-            <Outlet />
-         
-       
+
+        <Outlet />
       </div>
     </section>
   )
