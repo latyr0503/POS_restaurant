@@ -1,4 +1,4 @@
-import type { ProductType } from "@/types/auth"
+import type { CustomerType, ProductType } from "@/types/auth"
 import type { MenuType } from "@/types/menu"
 import {
   Bell,
@@ -17,84 +17,102 @@ export const slideImages: string[] = [
   "/images/bg-2.jpeg",
 ]
 
-export const products: ProductType[] = [
+export const initialProducts: ProductType[] = [
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Classic Burger",
+    productname: "Classic Burger",
+    category: "Fast Food",
+    productunit: 1,
     price: 1500,
-    note: 4.5,
+    quantity: 45,
     status: "In Stock",
     description: "Steak haché, cheddar, salade, tomate",
     image: "/images/Classic Burger.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Chicken Burger",
+    productname: "Chicken Burger",
+    category: "Fast Food",
+    productunit: 3,
     price: 1500,
-    note: 4.2,
+    quantity: 42,
     status: "In Stock",
     description: "Poulet croustillant, mayo, cornichons",
     image: "/images/Chicken Burger.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Double Smash",
+    productname: "Double Smash",
+    category: "Fast Food",
+    productunit: 2,
     price: 2500,
-    note: 5.0,
+    quantity: 50,
     status: "In Stock",
     description: "Double steak, double cheddar, sauce spéciale",
     image: "/images/Double Smash.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Hot Dog",
+    productname: "Hot Dog",
+    category: "Fast Food",
+    productunit: 4,
     price: 2000,
-    note: 4.0,
+    quantity: 40,
     status: "In Stock",
     description: "Saucisse grillée, moutarde, ketchup",
     image: "/images/Hot Dog.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Pizza Margherita",
+    productname: "Pizza Margherita",
+    category: "Fast Food",
+    productunit: 1,
     price: 4000,
-    note: 4.7,
+    quantity: 47,
     status: "In Stock",
     description: "Mozzarella, tomate, basilic frais",
     image: "/images/Pizza Margherita.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Tacos Poulet",
+    productname: "Tacos Poulet",
+    category: "Fast Food",
+    productunit: 2,
     price: 2500,
-    note: 4.3,
+    quantity: 43,
     status: "In Stock",
     description: "Poulet grillé, fromage fondu, frites",
     image: "/images/Tacos Poulet.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Nuggets x8",
+    productname: "Nuggets x8",
+    category: "Fast Food",
+    productunit: 4,
     price: 2500,
-    note: 4.1,
+    quantity: 41,
     status: "In Stock",
     description: "Nuggets croustillants, sauce BBQ",
     image: "/images/Nuggets x8.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "French Fries",
+    productname: "French Fries",
+     category: "Fast Food",
+    productunit: 1,
     price: 1500,
-    note: 4.6,
+    quantity: 46,
     status: "In Stock",
     description: "Frites dorées, sel, ketchup",
     image: "/images/French Fries.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    name: "Cheese Sandwich",
+    productname: "Cheese Sandwich",
+    category: "Fast Food",
+    productunit: 2,
     price: 2000,
-    note: 3.8,
+    quantity: 38,
     status: "In Stock",
     description: "Pain grillé, cheddar fondu, jambon",
     image: "/images/Cheese Sandwich.jpg",
@@ -128,8 +146,8 @@ export const menu: MenuType[] = [
     icon: Bell,
   },
   {
-    name: "Utilisateurs",
-    link: "/dashboard/users",
+    name: "Gestion clientèle",
+    link: "/dashboard/customers-page",
     icon: User,
   },
   {
@@ -142,4 +160,88 @@ export const menu: MenuType[] = [
     link: "/dashboard/settings",
     icon: Settings,
   },
+]
+
+export const initialCustomers: CustomerType[] = [
+  {
+    id: 1,
+    name: "SIMEON DAISE",
+    orders: 150,
+    gender: "Male",
+    spent: "1500 FCFA",
+    address: "Castor",
+    image: "/images/SIMEON DAISE.jpg"
+  },
+   {
+     id: 2,
+    name: "Jonas",
+    orders: 250,
+    gender: "Male",
+    spent: "2000 FCFA",
+    address: "Pikine",
+    image: "/images/Jonas.jpg"
+  },
+   {
+     id: 3,
+    name: "Caleb Vogel",
+    orders: 200,
+    gender: "Male",
+    spent: "2500 FCFA",
+    address: "Medina",
+    image: "/images/Caleb Vogel.jpg"
+  },
+   {
+     id: 4,
+    name: "THEODOR",
+    orders: 350,
+    gender: "Male",
+    spent: "2900 FCFA",
+    address: "Guediawaye",
+    image: "/images/Theodor.jpg"
+  },
+   {
+     id: 5,
+    name: "JACK JEAN",
+    orders: 450,
+    gender: "Male",
+    spent: "3500 FCFA",
+    address: "Thiaroy",
+    image: "/images/Jack Jean.jpg"
+  },
+   {
+     id: 6,
+    name: "LEONARD",
+    orders: 360,
+    gender: "Male",
+    spent: "3800 FCFA",
+    address: "Rufisque",
+    image: "/images/Leonard.jpg"
+  },
+   {
+     id: 7,
+    name: "FRANCOIS",
+    orders: 250,
+    gender: "Male",
+    spent: "3000 FCFA",
+    address: "Mbao",
+    image: "/images/François.jpg"
+  },
+   {
+     id: 8,
+    name: "ADRIEN",
+    orders: 380,
+    gender: "Male",
+    spent: "2500 FCFA",
+    address: "Grand Mbao",
+    image: "/images/Adrien.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
+  }
 ]

@@ -17,10 +17,22 @@ export interface FormRegister extends FormLogin {
 
 export interface ProductType {
   productid: string
-  name: string
+  productname: string
+  category: string
+  productunit: number
   price: number
-  note: number
+  quantity: number
   image: string
   status: string
   description: string
+}
+
+export interface CustomerType {
+   id: number
+  name: string
+  orders: number
+  gender: string
+  spent: string
+  address: string
+  image: string
 }
