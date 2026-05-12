@@ -1,46 +1,33 @@
 import { useState } from "react"
-import { Trash2, Pencil, Plus, ImagePlus, X } from "lucide-react"
-import { products } from "@/lib/data"
+import { Trash2, Pencil, Plus, X } from "lucide-react"
+import { Link } from "react-router-dom"
+import { initialProducts } from "@/lib/data"
 import type { ProductType } from "@/types/auth"
 
 export default function Product() {
-  const [showDelete, setShowDelete] = useState(false)
-  const [showAdd, setShowAdd] = useState(false)
-  const [preview, setPreview] = useState<string | null>(null)
-  const [form, setForm] = useState<ProductType>({
-    productid: `ID-${crypto.randomUUID()}`,
-    name: "",
-    price: 0,
-    note: 4.5,
-    status: "In Stock",
-    description: "",
-    image: "",
-  })
+  const [showDelete, setShowDelete] = useState<string | null>(null)
+  const [products, setProducts] = useState<ProductType[]>(initialProducts)
 
+  const handleDelete = (id: string) => {
+  setProducts(products.filter((item) => item.productid !== id))
 
-
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    const url = URL.createObjectURL(file)
-    setPreview(url)
-  }
+  setShowDelete(null)
+}
 
   return (
     <div>
-      {!showAdd ? (
+     
         <>
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Product</h2>
 
-            <button
-              onClick={() => setShowAdd(true)}
+            <Link
+              to="/dashboard/add-product"
               className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white"
             >
               <Plus size={18} />
               Add Product
-            </button>
+            </Link>
           </div>
 
           <div className="rounded-xl bg-white shadow-sm">
@@ -48,31 +35,36 @@ export default function Product() {
               <thead className="border-b text-gray-500">
                 <tr>
                   <th className="border-r p-4 text-left">Product</th>
-                  <th className="border-r">Product ID</th>
-                  <th className="border-r">Note</th>
-                  <th className="border-r">Price</th>
                   <th className="border-r">Status</th>
+                  <th className="border-r">Product ID</th>
+                  <th className="border-r">Qantity</th>
+                  <th className="border-r">Price</th>
+
                   <th className="text-center">Action</th>
                 </tr>
               </thead>
 
               <tbody>
                 {products.map((item, index) => (
-                  <tr key={index} className="border-b">
+                  <tr key={index} className="border-b font-semibold">
                     <td className="flex items-center gap-3 border-r p-4">
-                      <img src={item.image} alt="product" className="h-12 w-12 rounded-lg" />
-                      {item.name}
+                      <img
+                        src={item.image}
+                        alt="product"
+                        className="h-12 w-12 rounded-lg"
+                      />
+                      {item.productname}
                     </td>
 
-                    <td className="border-r">{item.productid}</td>
-                    <td className="border-r">{item.note}</td>
-                    <td className="border-r">{item.price}</td>
-
-                    <td>
-                      <span className="rounded-full bg-green-100 px-3 py-1 text-xs text-green-600">
+                    <td className="border-r px-4">
+                      <span className="text-md font-semibold text-green-500">
                         {item.status}
                       </span>
                     </td>
+
+                    <td className="border-r px-4 font-semibold">{item.productid}</td>
+                    <td className="border-r px-4 font-semibold">{item.quantity}</td>
+                    <td className="border-r px-4 font-semibold">{item.price}</td>
 
                     <td className="border-r p-4">
                       <div className="flex items-center justify-center gap-3">
@@ -80,12 +72,18 @@ export default function Product() {
                           className="cursor-pointer text-green-500"
                           size={18}
                         />
+                        <span className="cursor-pointer font-semibold text-green-500">
+                          Edit
+                        </span>
 
                         <Trash2
-                          className="cursor-pointer text-red-500"
+                          className="cursor-pointer text-primary"
                           size={18}
-                          onClick={() => setShowDelete(true)}
+                          onClick={() => setShowDelete(item.productid)}
                         />
+                        <span className="cursor-pointer font-semibold text-primary">
+                          Delete
+                        </span>
                       </div>
                     </td>
                   </tr>
@@ -94,12 +92,12 @@ export default function Product() {
             </table>
           </div>
 
-          {showDelete && (
+          {showDelete !== null && (
             <div className="fixed inset-0 flex items-center justify-center bg-black/40">
               <div className="relative w-[320px] rounded-xl bg-white p-6 text-center">
                 <button
-                  onClick={() => setShowDelete(false)}
-                  className="absolute top-3 right-3"
+                  onClick={() => setShowDelete(null)}
+                  className="absolute top-3 right-3 cursor-pointer"
                 >
                   <X size={18} />
                 </button>
@@ -115,12 +113,14 @@ export default function Product() {
                 </p>
 
                 <div className="flex justify-center gap-3">
-                  <button className="rounded-lg bg-primary px-4 py-2 text-white">
+                  <button 
+                   onClick={() => handleDelete(showDelete)}
+                   className="cursor-pointer rounded-lg bg-primary px-4 py-2 text-white">
                     Yes
                   </button>
                   <button
-                    onClick={() => setShowDelete(false)}
-                    className="rounded-lg bg-black px-4 py-2"
+                    onClick={() => setShowDelete(null)}
+                    className="cursor-pointer rounded-lg bg-black px-4 py-2 text-white"
                   >
                     No
                   </button>
@@ -129,53 +129,6 @@ export default function Product() {
             </div>
           )}
         </>
-      ) : (
-        <>
-          <h2 className="mb-6 text-xl font-semibold">Add Product</h2>
-
-          <form onSubmit={() => {}} className="max-w-3xl rounded-xl bg-white p-6 shadow-sm">
-            <label className="flex h-52 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed">
-              {preview ? (
-                <img src={preview} className="h-40 rounded-lg" />
-              ) : (
-                <div className="text-center">
-                  <ImagePlus className="mx-auto text-gray-400" size={30} />
-                  <p className="mt-2 text-sm text-gray-400">Upload Image</p>
-                </div>
-              )}
-
-              <input type="file" className="hidden" onChange={handleImage} />
-            </label>
-
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <input
-                placeholder="Product Name"
-                className="rounded-lg border p-3"
-              />
-              <input
-                placeholder="Product Unit"
-                className="rounded-lg border p-3"
-              />
-              <input placeholder="Category" className="rounded-lg border p-3" />
-              <input placeholder="Price" className="rounded-lg border p-3" />
-              <input placeholder="Status" className="rounded-lg border p-3" />
-              <input
-              disabled
-              value={`ID-${crypto.randomUUID()}`}
-                placeholder="Product ID"
-                className="rounded-lg border p-3"
-              />
-            </div>
-
-            <button
-              onClick={() => setShowAdd(false)}
-              className="mt-6 rounded-lg bg-primary px-6 py-3 text-white"
-            >
-              Save Product
-            </button>   
-          </form>
-        </>
-      )}
     </div>
   )
 }

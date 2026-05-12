@@ -21,8 +21,9 @@ export default function Sidebar() {
           className={({ isActive }) =>
             isActive ? "text-primary" : "text-gray-400"
           }
-          to={item.link}
           key={item.link}
+          to={item.link}
+          end={item.link === "/dashboard"}
         >
           <item.icon className="cursor-pointer hover:text-primary" />
         </NavLink>
