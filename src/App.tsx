@@ -15,6 +15,7 @@ import AddProduct from "./pages/auth/add-product"
 import CustomersPage from "./pages/auth/customers-page"
 import AddCustomers from "./pages/auth/add-customers"
 import EditCustomer from "./pages/auth/edit-customer"
+import FormCommande from "./pages/Dashbaord/form-commande"
 
 export function App() {
   return (
@@ -24,6 +25,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<AppLayout />}>
+          <Route path="/dashboard/form-commande" element={<FormCommande />} />
             <Route index element={<Dashboard />} />
             <Route path="product" element={<Product />} />
             <Route path="add-product" element={<AddProduct />} />
@@ -43,6 +45,7 @@ export function App() {
             <Route path="/password-changed" element={<PasswordChanged />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,5 @@
-import { Button, buttonVariants } from "@/components/button"
-import { Input } from "@/components/input"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { authStore, STORAGE_KEYS } from "@/lib/localforage"
 import { cn } from "@/lib/utils"
 import React from "react"
@@ -61,7 +61,7 @@ export default function Register() {
       if (emailExists) {
         toast.error("Un compte avec cet email existe déjà")
         return
-      } 
+      }
 
       // ── Sauvegarder le nouvel utilisateur ─────────────────────────────
       const { confirmPassword: _confirmPassword, ...userToSave } = form
@@ -77,98 +77,98 @@ export default function Register() {
   }
 
   return (
-   <div className="space-y-10">
+    <div className="space-y-10">
 
-          <h2 className="text-3xl font-bold text-gray-800">
-            Créer un compte !
-          </h2>
+      <h2 className="text-3xl font-bold text-gray-800">
+        Créer un compte !
+      </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <Input
-                name="nom"
-                value={form.nom}
-                onChange={handleChange}
-                Icon={User2}
-                type="text"
-                placeholder="Nom"
-              />
-              <Input
-                name="prenom"
-                value={form.prenom}
-                onChange={handleChange}
-                Icon={User2}
-                type="text"
-                placeholder="Prenom"
-              />
-            </div>
-            <Input
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              Icon={Mail}
-              type="email"
-              placeholder="Adresse email"
-            />
-            <Input
-              name="telephone"
-              value={form.telephone}
-              onChange={handleChange}
-              Icon={Phone}
-              type="number"
-              placeholder="Numero de telephone"
-            />
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <Input
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                Icon={Lock}
-                type="password"
-                placeholder="Mot de passe"
-              />
-              <Input
-                name="confirmPassword"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                Icon={Lock}
-                type="password"
-                placeholder="Confirmer le mot de passe"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="conditions"
-                checked={form.conditions}
-                onChange={(e) =>
-                  setForm({ ...form, conditions: e.target.checked })
-                }
-                className="h-4 w-4 cursor-pointer accent-primary"
-              />
-              <label
-                htmlFor="conditions"
-                className="cursor-pointer text-sm text-gray-500"
-              >
-                J'accepte les{" "}
-                <span className="cursor-pointer font-medium text-primary hover:underline">
-                  conditions d'utilisation
-                </span>
-              </label>
-            </div>
-            <Button className="w-full">S'inscrire</Button>
-          </form>
-
-          <p className="text-center text-sm text-gray-400">
-            Déjà un compte ?{" "}
-            <Link
-              className={cn(buttonVariants({ variant: "link" }))}
-              to="/login"
-            >
-              Se connecter
-            </Link>
-          </p>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <Input
+            name="nom"
+            value={form.nom}
+            onChange={handleChange}
+            Icon={User2}
+            type="text"
+            placeholder="Nom"
+          />
+          <Input
+            name="prenom"
+            value={form.prenom}
+            onChange={handleChange}
+            Icon={User2}
+            type="text"
+            placeholder="Prenom"
+          />
         </div>
-      
+        <Input
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          Icon={Mail}
+          type="email"
+          placeholder="Adresse email"
+        />
+        <Input
+          name="telephone"
+          value={form.telephone}
+          onChange={handleChange}
+          Icon={Phone}
+          type="number"
+          placeholder="Numero de telephone"
+        />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Input
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            Icon={Lock}
+            type="password"
+            placeholder="Mot de passe"
+          />
+          <Input
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            Icon={Lock}
+            type="password"
+            placeholder="Confirmer le mot de passe"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="conditions"
+            checked={form.conditions}
+            onChange={(e) =>
+              setForm({ ...form, conditions: e.target.checked })
+            }
+            className="h-4 w-4 cursor-pointer accent-primary"
+          />
+          <label
+            htmlFor="conditions"
+            className="cursor-pointer text-sm text-gray-500"
+          >
+            J'accepte les{" "}
+            <span className="cursor-pointer font-medium text-primary hover:underline">
+              conditions d'utilisation
+            </span>
+          </label>
+        </div>
+        <Button className="w-full">S'inscrire</Button>
+      </form>
+
+      <p className="text-center text-sm text-gray-400">
+        Déjà un compte ?{" "}
+        <Link
+          className={cn(buttonVariants({ variant: "link" }))}
+          to="/login"
+        >
+          Se connecter
+        </Link>
+      </p>
+    </div>
+
   )
 }

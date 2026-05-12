@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
-import { Input } from "@/components/input"
-import { Button } from "@/components/button"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import { Lock } from "lucide-react"
 
 export default function ResetPassword() {
