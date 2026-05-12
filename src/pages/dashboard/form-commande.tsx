@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import OrderSuccess from "@/components/succes-page"
+import { toast } from "sonner"
 
 export default function FormCommande() {
   const [headerVisible, setHeaderVisible] = useState(true)
@@ -47,7 +48,39 @@ export default function FormCommande() {
   const total = subtotal + tax + 200
 
   const handleSubmit = () => {
+    if (!form.nom) {
+      toast.error("Veuillez entrer votre nom")
+      return
+    }
+    if (!form.genre) {
+      toast.error("Veuillez sélectionner votre genre")
+      return
+    }
+    if (!form.adresse) {
+      toast.error("Veuillez entrer votre adresse")
+      return
+    }
+    if (!form.telephone) {
+      toast.error("Veuillez entrer votre numéro de téléphone")
+      return
+    }
+    if (!form.email) {
+      toast.error("Veuillez entrer votre email")
+      return
+    }
     setHeaderVisible(false)
+  }
+
+  const supprimerArticle = (index: number) => {
+    setPanier(panier.filter((_, i) => i !== index))
+  }
+
+  const [isPrint, setIsPrint] = useState(false)
+
+  const handlePrint = () => {
+    setIsPrint(true)
+    setHeaderVisible(false)
+    window.print();
   }
 
   return (
@@ -129,7 +162,7 @@ export default function FormCommande() {
             </div>
           </div>
 
-          <div className="flex flex-1 items-end gap-32">
+          <div className="mt-6 flex flex-1 gap-32">
             <div className="flex-1 space-y-3">
               {panier.map((item, index) => (
                 <div
@@ -150,7 +183,10 @@ export default function FormCommande() {
                   <span className="text-sm font-bold text-black">
                     Quantité : {item.quantite}
                   </span>
-                  <button className="text-gray-400 hover:text-gray-600">
+                  <button
+                    onClick={() => supprimerArticle(index)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
                     <X className="size-5 text-black" />
                   </button>
                 </div>
@@ -183,6 +219,11 @@ export default function FormCommande() {
                   genre={form.genre}
                   nom={form.nom}
                   telephone={form.telephone}
+                  panier={panier} 
+                  subtotal={subtotal}
+                  tax={tax}
+                  total={total}
+                  onPrint={handlePrint}
                 />
                 <Button
                   onClick={handleSubmit}
@@ -196,41 +237,127 @@ export default function FormCommande() {
         </div>
       ) : (
         <OrderSuccess
-          image="/images/Successful.svg"
-          title="Votre commande a été enregistrée avec succès !"
-          description="Veuillez patienter 5 à 10 minutes pour votre commande."
+          image={isPrint ? "/images/Printing.svg" : "/images/Successful.svg"}
+          title={
+            isPrint
+              ? "Facture imprimée avec succès !"
+              : "Votre commande a été enregistrée avec succès !"
+          }
+          description={
+            isPrint
+              ? "Veuillez patienter quelques minutes pour l'impression de la facture."
+              : "Veuillez patienter 5 à 10 minutes pour votre commande."
+          }
         />
       )}
     </div>
   )
 }
 
+
+
 function ModalImprimer({
-  adresse,
   customerId,
-  menu,
-  email,
-  genre,
   nom,
+  genre,
+  adresse,
   telephone,
-}: FormCommandeType) {
+  email,
+  panier,
+  subtotal,
+  tax,
+  total,
+  onPrint,
+}: FormCommandeType & {
+  panier: PanierItem[]
+  subtotal: number
+  tax: number
+  total: number
+  onPrint: () => void
+}) {
   return (
     <Dialog>
-      <DialogTrigger>Imprimer</DialogTrigger>
-      <DialogContent>
+      <DialogTrigger asChild>
+        <Button className="flex-1 bg-primary text-white hover:bg-primary/80">
+          Imprimer
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">
-            Resumer de la commande {customerId}
+            Receipt #{customerId.slice(0, 8).toUpperCase()}
           </DialogTitle>
-          <DialogDescription>
-            <p>Nom : {nom}</p>
-            <p>Genre : {genre}</p>
-            <p>Adresse : {adresse}</p>
-            <p>Téléphone : {telephone}</p>
-            <p>Email : {email}</p>
-            <p>Menu : {menu.map((item) => item.nom).join(", ")}</p>
-          </DialogDescription>
         </DialogHeader>
+
+        
+        <div className="space-y-2 border-b pb-4">
+          <div className="flex justify-between">
+            <span className="font-semibold">Recipient</span>
+            <span>{nom || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Genre</span>
+            <span>{genre || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Adresse</span>
+            <span>{adresse || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Téléphone</span>
+            <span>{telephone || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Email</span>
+            <span>{email || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Customer ID</span>
+            <span>{customerId.slice(0, 8).toUpperCase()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold">Date</span>
+            <span>{new Date().toLocaleDateString()}</span>
+          </div>
+        </div>
+
+        <div className="space-y-2 border-b pb-4">
+          {panier.map((item, index) => (
+            <div key={index} className="flex justify-between text-sm">
+              <span>
+                {index + 1}. {item.menu.nom}
+              </span>
+              <span>{item.quantite}</span>
+              <span className="font-bold">{item.menu.prix} FCFA</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between font-semibold">
+            <span>Subtotal</span>
+            <span>{subtotal} FCFA</span>
+          </div>
+          <div className="flex justify-between text-sm text-gray-500">
+            <span>Tax</span>
+            <span>{tax} FCFA</span>
+          </div>
+          <div className="flex justify-between text-sm text-gray-500">
+            <span>Charges</span>
+            <span>200 FCFA</span>
+          </div>
+          <div className="flex justify-between border-t pt-2 text-lg font-bold">
+            <span>Total</span>
+            <span>{total} FCFA</span>
+          </div>
+        </div>
+
+        <Button
+          onClick={onPrint}
+          className="mt-4 w-full bg-primary text-white hover:bg-primary/80"
+        >
+          Imprimer la facture
+        </Button>
       </DialogContent>
     </Dialog>
   )

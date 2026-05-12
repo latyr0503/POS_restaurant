@@ -10,6 +10,13 @@ import Header from "@/components/header"
 
 export default function Dashboard() {
   const [panier, setPanier] = useState<{ menu: Menu; quantite: number }[]>([])
+  const [recherche, setRecherche] = useState("")
+  const navigate = useNavigate()
+
+
+  const menusFiltres = menus.filter((menu) =>
+    menu.nom.toLowerCase().includes(recherche.toLowerCase())
+  )
 
   const ajouterAuPanier = (menu: Menu) => {
     const existe = panier.find((item) => item.menu.id === menu.id)
@@ -35,23 +42,21 @@ export default function Dashboard() {
         .filter((item) => item.quantite > 0)
     )
   }
-  const navigate = useNavigate()
+  
   const validerCommande = async () => {
     await localforage.setItem("panier", panier)
     navigate("/dashboard/form-commande")
   }
 
   return (
-    <>
-            <Header />
-
     <div className="flex flex-1 overflow-hidden">
       <main className="flex-1 overflow-y-auto p-6">
+      <Header onRecherche={setRecherche} />
         <h2 className="mb-6 text-2xl font-extrabold text-black">
           Special Menu
         </h2>
         <div className="grid grid-cols-3 gap-6">
-          {menus.map((menu: Menu) => (
+          {menusFiltres.map((menu: Menu) => (
             <CardProduit
               key={menu.id}
               menu={menu}
@@ -145,6 +150,5 @@ export default function Dashboard() {
         )}
       </div>
     </div>
-    </>
   )
 }

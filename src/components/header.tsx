@@ -1,8 +1,8 @@
 import { Bell, Search } from "lucide-react"
 
-export default function Header() {
+export default function Header({ onRecherche }: { onRecherche?: (valeur: string) => void }) {
   return (
-    <header className="flex items-center justify-between border-b bg-white px-8 py-6">
+    <header className="flex items-center justify-between py-6">
       <span className="text-3xl font-bold">
         <span className="text-black">JAAY</span>
         <span className="text-primary">KAT</span>
@@ -12,6 +12,7 @@ export default function Header() {
           <input
             type="text"
             placeholder="Recherchez un produit"
+            onChange={(e) => onRecherche?.(e.target.value)}
             className="flex-1 text-sm outline-none placeholder:text-gray-400"
           />
           <Search className="h-4 w-4 text-gray-400" />
