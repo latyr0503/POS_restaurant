@@ -18,7 +18,7 @@ export const menus: Menu[] = [
   {
     id: 2,
     nom: "Chicken Burger",
-    prix: 1500,
+    prix: 1800,
     note: 4.2,
     description: "Poulet croustillant, mayo, cornichons",
     image: "/images/Chicken Burger.jpeg",
