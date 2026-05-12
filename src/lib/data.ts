@@ -117,6 +117,61 @@ export const initialProducts: ProductType[] = [
     description: "Pain grillé, cheddar fondu, jambon",
     image: "/images/Cheese Sandwich.jpg",
   },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Gâteau Au Chocolat",
+    category: "Pâtiserie",
+    productunit: 2,
+    price: 2000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Pain grillé, cheddar fondu, jambon",
+    image: "/images/Gâteau Au Chocolat.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Jus Locaux",
+    category: "Fast Food",
+    productunit: 2,
+    price: 2000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Pain grillé, cheddar fondu, jambon",
+    image: "/images/Jus Locaux.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Recette Vermicelle",
+    category: "Restaurant",
+    productunit: 2,
+    price: 2000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Vermicelle, Poulet, Sauce",
+    image: "/images/Recette Vermicelle.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Un dibi poulet",
+    category: "Fast Food",
+    productunit: 2,
+    price: 4000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Poulet, Oignon",
+    image: "/images/Un dibi poulet.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Glace",
+    category: "Glacier",
+    productunit: 2,
+    price: 1500,
+    quantity: 38,
+    status: "In Stock",
+    description: " ",
+    image: "/images/Glace.jpg",
+  },
 ]
 
 export const menu: MenuType[] = [
@@ -234,6 +289,51 @@ export const initialCustomers: CustomerType[] = [
     spent: "2500 FCFA",
     address: "Grand Mbao",
     image: "/images/Adrien.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
+  },
+   {
+     id: 9,
+    name: "YANICK",
+    orders: 470,
+    gender: "Male",
+    spent: "3300 FCFA",
+    address: "Castor",
+    image: "/images/Yanick.jpg"
   },
    {
      id: 9,

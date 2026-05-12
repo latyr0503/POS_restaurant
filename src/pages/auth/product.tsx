@@ -7,6 +7,15 @@ import type { ProductType } from "@/types/auth"
 export default function Product() {
   const [showDelete, setShowDelete] = useState<string | null>(null)
   const [products, setProducts] = useState<ProductType[]>(initialProducts)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const itemsPerpage = 5
+  const totalPages = Math.ceil(
+    products.length / itemsPerpage
+  )
+  const startIndex = (currentPage - 1) * itemsPerpage
+  const currentProducts = products.slice(startIndex + itemsPerpage)
+
 
   const handleDelete = (id: string) => {
   setProducts(products.filter((item) => item.productid !== id))
@@ -45,13 +54,13 @@ export default function Product() {
               </thead>
 
               <tbody>
-                {products.map((item, index) => (
+                {currentProducts.map((item, index) => (
                   <tr key={index} className="border-b font-semibold">
                     <td className="flex items-center gap-3 border-r p-4">
                       <img
                         src={item.image}
                         alt="product"
-                        className="h-12 w-12 rounded-lg"
+                        className="h-12 w-12 object-cover rounded-lg"
                       />
                       {item.productname}
                     </td>
@@ -90,6 +99,28 @@ export default function Product() {
                 ))}
               </tbody>
             </table>
+            <div className="flex items-center justify-between px-6 py-4">
+             <button 
+             onClick={() => setCurrentPage((prev) => prev > 1 ? prev -1 : prev)}
+             className="rounded-lg border px-4 py-2 text-sm font-medium"
+             >
+             Previous
+             </button>
+             <div className="flex items-center gap-2">
+             {Array.from({ length: totalPages}, 
+              (_, index)  => (
+                <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`h-9 w-9 rounded-lg text-sm font-semibold $(currentPage === index + 1
+                  ? "bg-primary text-white" : "bg-gray-100 text-gray-700")}
+                >
+
+                </button>
+              )
+             )}
+             </div>
+            </div>
           </div>
 
           {showDelete !== null && (
