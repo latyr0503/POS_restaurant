@@ -12,8 +12,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { toast } from "sonner"
-import OrderSuccess from "@/components/Succes-page"
+
 import type { FormCommandeType, PanierItem } from "@/types/menu"
+import OrderSuccess from "@/components/Succes-page"
 
 
 export default function FormCommande() {
