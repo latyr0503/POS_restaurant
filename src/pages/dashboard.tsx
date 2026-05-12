@@ -67,7 +67,7 @@ export default function Dashboard() {
         </div>
       </main>
 
-      <div className="flex w-96 flex-col">
+      <div className="flex w-80 flex-col mt-40">
         {panier.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="text-center text-xl text-gray-400">
