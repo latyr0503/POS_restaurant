@@ -26,12 +26,18 @@ export function App() {
           <Route path="/dashboard" element={<AppLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="product" element={<Product />} />
+<<<<<<< HEAD
             <Route path="add-product" element={<AddProduct />} />
             <Route path="menus" element={<h1>menus</h1>} />
             <Route path="sales" element={<h1>sales</h1>} />
             <Route path="customers-page" element={<CustomersPage/>} />
             <Route path="add-customers" element={<AddCustomers/>} />
             <Route path="edit-customer/:id" element={<EditCustomer/>} />
+=======
+            <Route path="menus" element={<h1>menus</h1>} />
+            <Route path="sales" element={<h1>sales</h1>} />
+            <Route path="users" element={<h1>users</h1>} />
+>>>>>>> 41a07e8 (correction aissatoou)
             <Route path="notifications" element={<h1>notifications</h1>} />
             <Route path="history" element={<h1>history</h1>} />
             <Route path="settings" element={<h1>settings</h1>} />
