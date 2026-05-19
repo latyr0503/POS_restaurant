@@ -1,4 +1,6 @@
 import type { CustomerType, ProductType } from "@/types/auth"
+import type { Menu, MenuType } from "@/types/menu"
+import {Bell,FileText,Hamburger,House,LayoutDashboard,SendHorizontal,Settings,User} from "lucide-react"
 import type { FormCommandeType, Menu, MenuType } from "@/types/menu"
 import {
   Bell,
@@ -106,10 +108,76 @@ export const initialProducts: ProductType[] = [
     category: "Fast Food",
     productunit: 2,
     price: 2000,
-    quantity: 38,
+    quantity: 50,
     status: "In Stock",
     description: "Pain grillé, cheddar fondu, jambon",
     image: "/images/Cheese Sandwich.jpg",
+  },
+  {   
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Gâteau Au Chocolat",
+    category: "Pâtiserie",
+    productunit: 2,
+    price: 2000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Chocolat fondu, Beurre, Sucre, oefs, Farine",
+    image: "/images/Gâteau Au Chocolat.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Jus Locaux",
+    category: "Fast Food",
+    productunit: 2,
+    price: 2000,
+    quantity: 30,
+    status: "In Stock",
+    description: "Hibiscus, Sucre, Menthe",
+    image: "/images/Jus Locaux.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Recette Vermicelle",
+    category: "Restaurant",
+    productunit: 2,
+    price: 2000,
+    quantity: 20,
+    status: "In Stock",
+    description: "Vermicelle, Poulet, Sauce",
+    image: "/images/Recette Vermicelle.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Un dibi poulet",
+    category: "Fast Food",
+    productunit: 2,
+    price: 4000,
+    quantity: 38,
+    status: "In Stock",
+    description: "Poulet, Oignon",
+    image: "/images/Un dibi poulet.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Glace",
+    category: "Glacier",
+    productunit: 2,
+    price: 1500,
+    quantity: 18,
+    status: "In Stock",
+    description: "Lait, Crême, Sucre, Arôme ",
+    image: "/images/Glace.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Senegalese food Thieboudienne",
+    category: "Restaurant",
+    productunit: 2,
+    price: 1500,
+    quantity: 40,
+    status: "In Stock",
+    description: "Riz, Poisson, Légumes",
+    image: "/images/Senegalese food Thieboudienne.jpg",
   },
 ]
 
@@ -141,7 +209,7 @@ export const menu: MenuType[] = [
   },
   {
     name: "Gestion clientèle",
-    link: "/dashboard/customers-page",
+    link: "/dashboard/customers",
     icon: User,
   },
   {
