@@ -4,7 +4,6 @@ import { X } from "lucide-react"
 import { useEffect, useState } from "react"
 import localforage from "localforage"
 import { toast } from "sonner"
-
 import type { FormCommandeType, Menu } from "@/types/menu"
 import ModalImprimerComponent from "@/components/modal"
 import OrderSuccess from "@/components/succes-page"
