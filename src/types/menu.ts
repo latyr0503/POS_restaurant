@@ -13,20 +13,27 @@ export interface Menu {
   note: number,
   description: string,
   image: string,
-}
-
- export interface PanierItem {
-  menu: Menu
-  quantite: number
+  quantity: number
 }
 
 
 export interface FormCommandeType {
+  customerId: string
   nom: string
   genre: string
   adresse: string
   telephone: string
   email: string
-  customerId: string
+  status?: boolean
+  inSide?: boolean
+  table?: number
+  paiement?: string
   menu : Menu[]
+  montant?: number
+}
+
+
+export interface Article {
+  menuId: number
+  quantite: number
 }

@@ -3,51 +3,46 @@ import { Input } from "@/components/ui/input"
 import { X } from "lucide-react"
 import { useEffect, useState } from "react"
 import localforage from "localforage"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { toast } from "sonner"
-import OrderSuccess from "@/components/Succes-page"
-import type { FormCommandeType, PanierItem } from "@/types/menu"
 
+import type { FormCommandeType, Menu } from "@/types/menu"
+import ModalImprimerComponent from "@/components/modal"
+import OrderSuccess from "@/components/succes-page"
 
 export default function FormCommande() {
   const [headerVisible, setHeaderVisible] = useState(true)
-  const [panier, setPanier] = useState<PanierItem[]>([])
+  const [panier, setPanier] = useState<Menu[]>([])
   const [form, setForm] = useState<FormCommandeType>({
     nom: "",
     genre: "",
     adresse: "",
     telephone: "",
     email: "",
+    status: false,
+    inSide: false,
+    paiement: "",
     customerId: crypto.randomUUID(),
-    menu: panier.map((item) => item.menu),
+    menu: panier.map((item) => item),
   })
 
   useEffect(() => {
-    localforage.getItem<PanierItem[]>("panier").then((data) => {
-      if (data) setPanier(data)
+    localforage.getItem<{ menu: Menu }[] | Menu[]>("panier").then((data) => {
+      if (data) {
+        // some parts of the app store panier as [{ menu: Menu }],
+        // so normalize to Menu[] for this component
+        const normalized = (data as any).map ? (data as any).map((d: any) => d.menu ?? d) : []
+        setPanier(normalized)
+      }
     })
   }, [])
+
+  console.log(panier)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
-
-  const subtotal = panier.reduce(
-    (total, item) => total + item.menu.prix * item.quantite,
-    0
-  )
-  const tax = Math.round(subtotal * 0.02)
-  const total = subtotal + tax + 200
-
   const handleSubmit = () => {
     if (!form.nom) {
       toast.error("Veuillez entrer votre nom")
@@ -83,6 +78,13 @@ export default function FormCommande() {
     setHeaderVisible(false)
     window.print();
   }
+    const subtotal = panier.reduce(
+    (total, item) => total + item.prix * item.quantity,
+    0
+  )
+  const tax = Math.round(subtotal * 0.02)
+  const total = subtotal + tax + 200
+
 
   return (
     <div>
@@ -171,18 +173,18 @@ export default function FormCommande() {
                   className="flex items-center gap-18 rounded-xl border border-gray-100"
                 >
                   <img
-                    src={item.menu.image}
-                    alt={item.menu.nom}
+                    src={item.image}
+                    alt={item.nom}
                     className="size-14 rounded-lg"
                   />
                   <span className="flex-1 font-bold text-black">
-                    {item.menu.nom}
+                    {item.nom}
                   </span>
                   <span className="font-bold text-primary">
-                    {item.menu.prix} FCFA
+                    {item.prix} FCFA
                   </span>
                   <span className="text-sm font-bold text-black">
-                    Quantité : {item.quantite}
+                    Quantité : {item.quantity}
                   </span>
                   <button
                     onClick={() => supprimerArticle(index)}
@@ -212,18 +214,15 @@ export default function FormCommande() {
                 <span>{total} FCFA</span>
               </div>
               <div className="flex gap-3 pt-4">
-                <ModalImprimer
+                <ModalImprimerComponent
                   adresse={form.adresse}
                   customerId={form.customerId}
-                  menu={form.menu}
+                  menu={panier}
                   email={form.email}
                   genre={form.genre}
                   nom={form.nom}
                   telephone={form.telephone}
-                  panier={panier} 
-                  subtotal={subtotal}
-                  tax={tax}
-                  total={total}
+                  panier={panier}
                   onPrint={handlePrint}
                 />
                 <Button
@@ -252,115 +251,6 @@ export default function FormCommande() {
         />
       )}
     </div>
-  )
-}
-
-
-
-function ModalImprimer({
-  customerId,
-  nom,
-  genre,
-  adresse,
-  telephone,
-  email,
-  panier,
-  subtotal,
-  tax,
-  total,
-  onPrint,
-}: FormCommandeType & {
-  panier: PanierItem[]
-  subtotal: number
-  tax: number
-  total: number
-  onPrint: () => void
-}) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="flex-1 bg-primary text-white hover:bg-primary/80">
-          Imprimer
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">
-            Receipt #{customerId.slice(0, 8).toUpperCase()}
-          </DialogTitle>
-        </DialogHeader>
-
-        
-        <div className="space-y-2 border-b pb-4">
-          <div className="flex justify-between">
-            <span className="font-semibold">Recipient</span>
-            <span>{nom || "—"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Genre</span>
-            <span>{genre || "—"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Adresse</span>
-            <span>{adresse || "—"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Téléphone</span>
-            <span>{telephone || "—"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Email</span>
-            <span>{email || "—"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Customer ID</span>
-            <span>{customerId.slice(0, 8).toUpperCase()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Date</span>
-            <span>{new Date().toLocaleDateString()}</span>
-          </div>
-        </div>
-
-        <div className="space-y-2 border-b pb-4">
-          {panier.map((item, index) => (
-            <div key={index} className="flex justify-between text-sm">
-              <span>
-                {index + 1}. {item.menu.nom}
-              </span>
-              <span>{item.quantite}</span>
-              <span className="font-bold">{item.menu.prix} FCFA</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex justify-between font-semibold">
-            <span>Subtotal</span>
-            <span>{subtotal} FCFA</span>
-          </div>
-          <div className="flex justify-between text-sm text-gray-500">
-            <span>Tax</span>
-            <span>{tax} FCFA</span>
-          </div>
-          <div className="flex justify-between text-sm text-gray-500">
-            <span>Charges</span>
-            <span>200 FCFA</span>
-          </div>
-          <div className="flex justify-between border-t pt-2 text-lg font-bold">
-            <span>Total</span>
-            <span>{total} FCFA</span>
-          </div>
-        </div>
-
-        <Button
-          onClick={onPrint}
-          className="mt-4 w-full bg-primary text-white hover:bg-primary/80"
-        >
-          Imprimer la facture
-        </Button>
-      </DialogContent>
-    </Dialog>
   )
 }
 

@@ -1,5 +1,5 @@
 import type { CustomerType, ProductType } from "@/types/auth"
-import type { Menu, MenuType } from "@/types/menu"
+import type { FormCommandeType, Menu, MenuType } from "@/types/menu"
 import {
   Bell,
   FileText,
@@ -92,7 +92,7 @@ export const initialProducts: ProductType[] = [
   {
     productid: `ID-${crypto.randomUUID()}`,
     productname: "French Fries",
-     category: "Fast Food",
+    category: "Fast Food",
     productunit: 1,
     price: 1500,
     quantity: 46,
@@ -164,161 +164,403 @@ export const initialCustomers: CustomerType[] = [
     gender: "Male",
     spent: "1500 FCFA",
     address: "Castor",
-    image: "/images/SIMEON DAISE.jpg"
+    image: "/images/SIMEON DAISE.jpg",
   },
-   {
-     id: 2,
+  {
+    id: 2,
     name: "Jonas",
     orders: 250,
     gender: "Male",
     spent: "2000 FCFA",
     address: "Pikine",
-    image: "/images/Jonas.jpg"
+    image: "/images/Jonas.jpg",
   },
-   {
-     id: 3,
+  {
+    id: 3,
     name: "Caleb Vogel",
     orders: 200,
     gender: "Male",
     spent: "2500 FCFA",
     address: "Medina",
-    image: "/images/Caleb Vogel.jpg"
+    image: "/images/Caleb Vogel.jpg",
   },
-   {
-     id: 4,
+  {
+    id: 4,
     name: "THEODOR",
     orders: 350,
     gender: "Male",
     spent: "2900 FCFA",
     address: "Guediawaye",
-    image: "/images/Theodor.jpg"
+    image: "/images/Theodor.jpg",
   },
-   {
-     id: 5,
+  {
+    id: 5,
     name: "JACK JEAN",
     orders: 450,
     gender: "Male",
     spent: "3500 FCFA",
     address: "Thiaroy",
-    image: "/images/Jack Jean.jpg"
+    image: "/images/Jack Jean.jpg",
   },
-   {
-     id: 6,
+  {
+    id: 6,
     name: "LEONARD",
     orders: 360,
     gender: "Male",
     spent: "3800 FCFA",
     address: "Rufisque",
-    image: "/images/Leonard.jpg"
+    image: "/images/Leonard.jpg",
   },
-   {
-     id: 7,
+  {
+    id: 7,
     name: "FRANCOIS",
     orders: 250,
     gender: "Male",
     spent: "3000 FCFA",
     address: "Mbao",
-    image: "/images/François.jpg"
+    image: "/images/François.jpg",
   },
-   {
-     id: 8,
+  {
+    id: 8,
     name: "ADRIEN",
     orders: 380,
     gender: "Male",
     spent: "2500 FCFA",
     address: "Grand Mbao",
-    image: "/images/Adrien.jpg"
+    image: "/images/Adrien.jpg",
   },
-   {
-     id: 9,
+  {
+    id: 9,
     name: "YANICK",
     orders: 470,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
-  }
+    image: "/images/Yanick.jpg",
+  },
 ]
 
+export const slideImages: string[] = [
+  "/images/patrimoine-culinaire.jpeg",
+  "/images/bg-1.jpeg",
+  "/images/bg-2.jpeg",
+]
 
+export const menus: Menu[] = [
+  {
+    id: 1,
+    nom: "Classic Burger",
+    prix: 1500,
+    note: 4.5,
+    description: "Steak haché, cheddar, salade, tomate",
+    image: "/images/Classic Burger.jpeg",
+    quantity: 1
+  },
+  {
+    id: 2,
+    nom: "Wrap Poulet",
+    prix: 2800,
+    note: 4.1,
+    description: "Poulet grillé, légumes, sauce yaourt",
+    image: "/images/Wrap Poulet.jpeg",
+    quantity: 1
+  },
+  {
+    id: 3,
+    nom: "Chicken Burger",
+    prix: 1800,
+    note: 4.2,
+    description: "Poulet croustillant, mayo, cornichons",
+    image: "/images/Chicken Burger.jpeg",
+    quantity: 1
+  },
+  {
+    id: 4,
+    nom: "Double Smash",
+    prix: 2500,
+    note: 5.0,
+    description: "Double steak, double cheddar, sauce spéciale",
+    image: "/images/Double Smash.jpeg",
+    quantity: 1
+  },
+  {
+    id: 5,
+    nom: "Waffle",
+    prix: 2500,
+    note: 4.5,
+    description: "Gaufre croustillante, chantilly",
+    image: "/images/Waffle.jpeg",
+    quantity: 1
+  },
+  {
+    id: 6,
+    nom: "Hot Dog",
+    prix: 2000,
+    note: 4.0,
+    description: "Saucisse grillée, moutarde, ketchup",
+    image: "/images/Hot Dog.jpeg",
+    quantity: 1
+  },
+  {
+    id: 7,
+    nom: "Jus d'Orange",
+    prix: 1000,
+    note: 4.1,
+    description: "Jus d'orange frais pressé",
+    image: "/images/Jus d'Orange.jpeg",
+    quantity: 1
+  },
+  {
+    id: 8,
+    nom: "Pizza Margherita",
+    prix: 4000,
+    note: 4.7,
+    description: "Mozzarella, tomate, basilic frais",
+    image: "/images/Pizza Margherita.jpeg",
+    quantity: 1
+  },
+  {
+    id: 9,
+    nom: "Veggie Burger",
+    prix: 2500,
+    note: 4.0,
+    description: "Steak végétal, avocat, salade",
+    image: "/images/Veggie Burger.jpeg",
+    quantity: 1
+  },
+  {
+    id: 10,
+    nom: "Tacos Poulet",
+    prix: 2500,
+    note: 4.3,
+    description: "Poulet grillé, fromage fondu, frites",
+    image: "/images/Tacos Poulet.jpeg",
+    quantity: 1
+  },
+  {
+    id: 11,
+    nom: "Nuggets x8",
+    prix: 2500,
+    note: 4.1,
+    description: "Nuggets croustillants, sauce BBQ",
+    image: "/images/Nuggets x8.jpeg",
+    quantity: 1
+  },
+  {
+    id: 12,
+    nom: "French Fries",
+    prix: 1500,
+    note: 4.6,
+    description: "Frites dorées, sel, ketchup",
+    image: "/images/French Fries.jpeg",
+    quantity: 1
+  },
+  {
+    id: 13,
+    nom: "Onion Rings",
+    prix: 1500,
+    note: 4.4,
+    description: "Rondelles d'oignon croustillantes",
+    image: "/images/Onion Rings.jpeg",
+    quantity: 1
+  },
+  {
+    id: 14,
+    nom: "Cheese Sandwich",
+    prix: 2000,
+    note: 3.8,
+    description: "Pain grillé, cheddar fondu, jambon",
+    image: "/images/Cheese Sandwich.jpeg",
+    quantity: 1
+  },
+  {
+    id: 15,
+    nom: "Sundae Chocolat",
+    prix: 1800,
+    note: 4.6,
+    description: "Glace vanille, sauce chocolat",
+    image: "/images/Sundae Chocolat.jpeg",
+    quantity: 1
+  },
+  {
+    id: 16,
+    nom: "Pancakes",
+    prix: 2500,
+    note: 4.6,
+    description: "Pancakes moelleux, sirop d'érable",
+    image: "/images/Pancakes.jpeg",
+    quantity: 1
+  },
+  {
+    id: 17,
+    nom: "BBQ Burger",
+    prix: 3000,
+    note: 4.3,
+    description: "Burger au barbecue, cheddar, oignons caramélisés",
+    image: "/images/BBQ Burger.jpeg",
+    quantity: 1
+  },
+  {
+    id: 18,
+    nom: "Apple Pie",
+    prix: 2000,
+    note: 4.4,
+    description: "Tarte aux pommes, glaçage",
+    image: "/images/Apple Pie.jpeg",
+    quantity: 1
+  },
+  {
+    id: 19,
+    nom: "Milkshake Vanille",
+    prix: 2000,
+    note: 4.7,
+    description: "Milkshake à la vanille, crème glacée",
+    image: "/images/Milkshake Vanille.jpeg",
+    quantity: 1
+  },
+  {
+    id: 20,
+    nom: "Fish Burger",
+    prix: 2500,
+    note: 4.6,
+    description: "Poisson pané, laitue, tomate",
+    image: "/images/Fish Burger.jpeg",
+    quantity: 1
+  },
+  {
+    id: 21,
+    nom: "Coca Cola",
+    prix: 1000,
+    note: 4.5,
+    description: "Boisson gazeuse, sucrée",
+    image: "/images/Coca Cola.jpeg",
+    quantity: 1
+  },
+  {
+    id: 22,
+    nom: "Churros",
+    prix: 1500,
+    note: 4.7,
+    description: "Beignets croustillants, sucre en poudre",
+    image: "/images/Churros.jpeg",
+    quantity: 1
+  },
+  {
+    id: 23,
+    nom: "Burrito",
+    prix: 3500,
+    note: 4.3,
+    description: "Tortilla remplie de viande, légumes et sauces",
+    image: "/images/Burrito.jpeg",
+    quantity: 1
+  },
+  {
+    id: 24,
+    nom: "Milkshake Chocolat",
+    prix: 2000,
+    note: 4.7,
+    description: "Milkshake à la vanille, crème glacée",
+    image: "/images/Milkshake Chocolat.jpeg",
+    quantity: 1
+  },
+  {
+    id: 25,
+    nom: "Quesadilla",
+    prix: 3000,
+    note: 4.4,
+    description: "Tortilla remplie de fromage et de viande",
+    image: "/images/Quesadilla.jpeg",
+    quantity: 1
+  },
+  {
+    id: 26,
+    nom: "Club Sandwich",
+    prix: 2800,
+    note: 4.5,
+    description: "Jambon, fromage, salade, tomate",
+    image: "/images/Club Sandwich.jpeg",
+    quantity: 1
+  },
+  {
+    id: 27,
+    nom: "Donut",
+    prix: 1000,
+    note: 4.2,
+    description: "Beignet glacé au chocolat",
+    image: "/images/Donut.jpeg",
+    quantity: 1
+  },
+]
 
-  export const slideImages: string[] = [
-    "/images/patrimoine-culinaire.jpeg",
-    "/images/bg-1.jpeg",
-    "/images/bg-2.jpeg",
-  ]
-
-  export const menus: Menu[] = [
+export const commandes:FormCommandeType[] = [
+  {
+    customerId: `ID-${crypto.randomUUID()}`,
+    nom: 'Latyr SENE',
+    genre: 'Male',
+    adresse: 'Castor',
+    telephone: '77 123 45 67',
+    email: 'latyr.sene@example.com',
+    status: false,
+    inSide: true,
+    table: 9,
+    montant: 23869,
+    paiement: "Espèces",
+    menu: menus.filter((item) => [1, 2, 3, 4].includes(item.id)),
+  },
     {
-      id: 1,
-      nom: "Classic Burger",
-      prix: 1500,
-      note: 4.5,
-      description: "Steak haché, cheddar, salade, tomate",
-      image: "/images/Classic Burger.jpeg",
-    },
+    customerId: `ID-${crypto.randomUUID()}`,
+    nom: 'Latyr SENE',
+    genre: 'Male',
+    adresse: 'Castor',
+    telephone: '77 123 45 67',
+    email: 'latyr.sene@example.com',
+    status: true,
+    inSide: true,
+    table: 9,
+    montant: 23869,
+    paiement: "Espèces",
+    menu: menus.filter((item) => [4, 5, 6].includes(item.id)),
+  },
     {
-      id: 2,
-      nom: "Chicken Burger",
-      prix: 1800,
-      note: 4.2,
-      description: "Poulet croustillant, mayo, cornichons",
-      image: "/images/Chicken Burger.jpeg",
-    },
+    customerId: `ID-${crypto.randomUUID()}`,
+    nom: 'Latyr SENE',
+    genre: 'Male',
+    adresse: 'Castor',
+    telephone: '77 123 45 67',
+    email: 'latyr.sene@example.com',
+    status: true,
+    inSide: true,
+    table: 9,
+    montant: 23869,
+    paiement: "Espèces",
+    menu: menus.filter((item) => [7,8,9].includes(item.id)),
+  },
     {
-      id: 3,
-      nom: "Double Smash",
-      prix: 2500,
-      note: 5.0,
-      description: "Double steak, double cheddar, sauce spéciale",
-      image: "/images/Double Smash.jpeg",
-    },
+    customerId: `ID-${crypto.randomUUID()}`,
+    nom: 'Latyr SENE',
+    genre: 'Male',
+    adresse: 'Castor',
+    telephone: '77 123 45 67',
+    email: 'latyr.sene@example.com',
+    status: true,
+    inSide: true,
+    table: 9,
+    montant: 23869,
+    paiement: "Espèces",
+    menu: menus.filter((item) => [10, 11].includes(item.id)),
+  },
     {
-      id: 4,
-      nom: "Hot Dog",
-      prix: 2000,
-      note: 4.0,
-      description: "Saucisse grillée, moutarde, ketchup",
-      image: "/images/Hot Dog.jpeg",
-    },
-    {
-      id: 5,
-      nom: "Pizza Margherita",
-      prix: 4000,
-      note: 4.7,
-      description: "Mozzarella, tomate, basilic frais",
-      image: "/images/Pizza Margherita.jpeg",
-    },
-    {
-      id: 6,
-      nom: "Tacos Poulet",
-      prix: 2500,
-      note: 4.3,
-      description: "Poulet grillé, fromage fondu, frites",
-      image: "/images/Tacos Poulet.jpeg",
-    },
-    {
-      id: 7,
-      nom: "Nuggets x8",
-      prix: 2500,
-      note: 4.1,
-      description: "Nuggets croustillants, sauce BBQ",
-      image: "/images/Nuggets x8.jpeg",
-    },
-    {
-      id: 8,
-      nom: "French Fries",
-      prix: 1500,
-      note: 4.6,
-      description: "Frites dorées, sel, ketchup",
-      image: "/images/French Fries.jpeg",
-    },
-    {
-      id: 9,
-      nom: "Cheese Sandwich",
-      prix: 2000,
-      note: 3.8,
-      description: "Pain grillé, cheddar fondu, jambon",
-      image: "/images/Cheese Sandwich.jpeg",
-    },
-  ]
+    customerId: `ID-${crypto.randomUUID()}`,
+    nom: 'Latyr SENE',
+    genre: 'Male',
+    adresse: 'Castor',
+    telephone: '77 123 45 67',
+    email: 'latyr.sene@example.com',
+    status: true,
+    inSide: true,
+    table: 9,
+    montant: 23869,
+    paiement: "Espèces",
+    menu: menus.filter((item) => [12].includes(item.id)),
+  }
+]
