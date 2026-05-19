@@ -1,7 +1,9 @@
+import { getItem, productsStore, setItem, STORAGE_KEYS } from "@/lib/localforage"
 import type { ProductType } from "@/types/auth"
 import { ArrowLeft, ImagePlus } from "lucide-react"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "sonner"
 
 export default function AddProduct() {
   const [preview, setPreview] = useState<string | null>(null)
@@ -12,29 +14,28 @@ export default function AddProduct() {
     productunit: 0,
     price: 0,
     quantity: 45,
-    status: "In Stock",
+    status: "",
     description: "",
     image: "",
   })
- const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-) => {
-  const { name, value } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
 
-  setForm({
-    ...form,
-    [name]:
-      name === "price" ||
-      name === "productunit" ||
-      name === "quantity"
-        ? Number(value)
-        : value,
-  })
-}
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    setForm({
+      ...form,
+      [name]:
+        name === "price" || name === "productunit" || name === "quantity"
+          ? Number(value)
+          : value,
+    })
   }
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+
+}
 
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -54,7 +55,6 @@ export default function AddProduct() {
         onSubmit={handleSubmit}
         className="rounded-2xl border bg-white p-6 shadow-sm"
       >
-
         <Link
           to="/dashboard/product"
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white"
@@ -72,16 +72,9 @@ export default function AddProduct() {
               />
             ) : (
               <>
-                <ImagePlus
-                  size={40}
-                  className="text-gray-400"
-                />
+                <ImagePlus size={40} className="text-gray-400" />
 
-                <input
-                  type="file"
-                  className="hidden"
-                  onChange={handleImage}
-                />
+                <input type="file" className="hidden" onChange={handleImage} />
               </>
             )}
           </label>
@@ -92,7 +85,6 @@ export default function AddProduct() {
         </div>
 
         <div className="mt-14 grid grid-cols-3 gap-8">
-    
           <div>
             <label className="mb-2 block text-sm font-semibold">
               Product Name :
@@ -128,19 +120,21 @@ export default function AddProduct() {
               Category :
             </label>
 
-            <input
-              type="text"
+            <select
               name="category"
               value={form.category}
               onChange={handleChange}
-              placeholder="Enter Category"
               className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-orange-400"
-            />
+            >
+               <option value="">Selectionner</option>
+              <option>Fast Food</option>
+              <option>Restaurant</option>
+              <option>Glacier</option>
+              <option>Pâtisserie</option>
+            </select>
           </div>
           <div>
-            <label className="mb-2 block text-sm font-semibold">
-              Price :
-            </label>
+            <label className="mb-2 block text-sm font-semibold">Price :</label>
 
             <input
               type="number"
@@ -153,9 +147,7 @@ export default function AddProduct() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold">
-              Status :
-            </label>
+            <label className="mb-2 block text-sm font-semibold">Status :</label>
 
             <select
               name="status"
@@ -163,6 +155,7 @@ export default function AddProduct() {
               onChange={handleChange}
               className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-orange-400"
             >
+              <option value="">Selectionner</option>
               <option>In Stock</option>
               <option>Out of Stock</option>
             </select>
@@ -194,3 +187,4 @@ export default function AddProduct() {
     </div>
   )
 }
+

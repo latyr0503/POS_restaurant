@@ -1,20 +1,19 @@
 import { useState } from "react"
-import {ArrowLeft,ImagePlus,} from "lucide-react"
-import {Link,useParams,} from "react-router-dom"
+import { ArrowLeft, ImagePlus } from "lucide-react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+
+import type { CustomerType } from "@/types/auth"
 import { initialCustomers } from "@/lib/data"
 
 export default function EditCustomer() {
   const { id } = useParams()
+  const [customers, setCustomers] = useState<CustomerType[]>(initialCustomers)
+  const customer = customers.find((item) => item.id === Number(id))
+  if (!customer) {
+    return <h1 className="p-10 text-xl">Customer not found</h1>
+  }
 
-  const customer = initialCustomers.find(
-    (item) => item.id === Number(id)
-  )
-
-  const [preview, setPreview] =
-    useState<string | null>(
-      customer?.image || null
-    )
-
+  const [preview, setPreview] = useState<string | null>(customer?.image || null)
   const [form, setForm] = useState({
     name: customer?.name || "",
     orders: customer?.orders || 0,
@@ -24,54 +23,54 @@ export default function EditCustomer() {
   })
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target
 
     setForm({
       ...form,
-      [name]:
-        name === "orders"
-          ? Number(value)
-          : value,
+      [name]: name === "orders" ? Number(value) : value,
     })
   }
 
-  const handleImage = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 
     if (!file) return
 
-    setPreview(
-      URL.createObjectURL(file)
-    )
+    setPreview(URL.createObjectURL(file))
   }
 
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-   
+    const updatedCustomers = customers.map((item) =>
+      item.id === Number(id)
+        ? {
+            ...item,
+            ...form,
+            image: preview || item.image,
+          }
+        : item
+    )
+
+    setCustomers(updatedCustomers)
+
+    navigate("/dashboard/customers")
   }
 
   return (
     <div>
-
-      <h1 className="mb-6 text-2xl font-bold text-[#1F2937]">
-        Edit Customer
-      </h1>
+      <h1 className="mb-6 text-2xl font-bold text-[#1F2937]">Edit Customer</h1>
 
       <form
         onSubmit={handleSubmit}
         className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
       >
         <Link
-          to="/dashboard/customers-page"
+          to="/dashboard/customers"
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white"
         >
           <ArrowLeft size={18} />
@@ -86,17 +85,10 @@ export default function EditCustomer() {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <ImagePlus
-                className="text-gray-400"
-                size={35}
-              />
+              <ImagePlus className="text-gray-400" size={35} />
             )}
 
-            <input
-              type="file"
-              className="hidden"
-              onChange={handleImage}
-            />
+            <input type="file" className="hidden" onChange={handleImage} />
           </label>
 
           <p className="mt-4 text-2xl font-semibold text-[#1F2937]">
@@ -105,7 +97,6 @@ export default function EditCustomer() {
         </div>
 
         <div className="mt-14 grid grid-cols-2 gap-8">
-        
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Full Name :
@@ -145,13 +136,9 @@ export default function EditCustomer() {
               onChange={handleChange}
               className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-orange-400"
             >
-              <option value="Male">
-                Male
-              </option>
+              <option value="male">Male</option>
 
-              <option value="Female">
-                Female
-              </option>
+              <option value="female">Female</option>
             </select>
           </div>
 

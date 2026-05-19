@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { toast } from "sonner"
-import OrderSuccess from "@/components/Succes-page"
+import OrderSuccess from "@/components/succes-page"
 import type { FormCommandeType, PanierItem } from "@/types/menu"
 
 

@@ -1,15 +1,6 @@
 import type { CustomerType, ProductType } from "@/types/auth"
 import type { Menu, MenuType } from "@/types/menu"
-import {
-  Bell,
-  FileText,
-  Hamburger,
-  House,
-  LayoutDashboard,
-  SendHorizontal,
-  Settings,
-  User,
-} from "lucide-react"
+import {Bell,FileText,Hamburger,House,LayoutDashboard,SendHorizontal,Settings,User} from "lucide-react"
 
 export const initialProducts: ProductType[] = [
   {
@@ -106,12 +97,12 @@ export const initialProducts: ProductType[] = [
     category: "Fast Food",
     productunit: 2,
     price: 2000,
-    quantity: 38,
+    quantity: 50,
     status: "In Stock",
     description: "Pain grillé, cheddar fondu, jambon",
     image: "/images/Cheese Sandwich.jpg",
   },
-  {
+  {   
     productid: `ID-${crypto.randomUUID()}`,
     productname: "Gâteau Au Chocolat",
     category: "Pâtiserie",
@@ -119,7 +110,7 @@ export const initialProducts: ProductType[] = [
     price: 2000,
     quantity: 38,
     status: "In Stock",
-    description: "Pain grillé, cheddar fondu, jambon",
+    description: "Chocolat fondu, Beurre, Sucre, oefs, Farine",
     image: "/images/Gâteau Au Chocolat.jpg",
   },
   {
@@ -128,9 +119,9 @@ export const initialProducts: ProductType[] = [
     category: "Fast Food",
     productunit: 2,
     price: 2000,
-    quantity: 38,
+    quantity: 30,
     status: "In Stock",
-    description: "Pain grillé, cheddar fondu, jambon",
+    description: "Hibiscus, Sucre, Menthe",
     image: "/images/Jus Locaux.jpg",
   },
   {
@@ -139,7 +130,7 @@ export const initialProducts: ProductType[] = [
     category: "Restaurant",
     productunit: 2,
     price: 2000,
-    quantity: 38,
+    quantity: 20,
     status: "In Stock",
     description: "Vermicelle, Poulet, Sauce",
     image: "/images/Recette Vermicelle.jpg",
@@ -161,10 +152,21 @@ export const initialProducts: ProductType[] = [
     category: "Glacier",
     productunit: 2,
     price: 1500,
-    quantity: 38,
+    quantity: 18,
     status: "In Stock",
-    description: " ",
+    description: "Lait, Crême, Sucre, Arôme ",
     image: "/images/Glace.jpg",
+  },
+  {
+    productid: `ID-${crypto.randomUUID()}`,
+    productname: "Senegalese food Thieboudienne",
+    category: "Restaurant",
+    productunit: 2,
+    price: 1500,
+    quantity: 40,
+    status: "In Stock",
+    description: "Riz, Poisson, Légumes",
+    image: "/images/Senegalese food Thieboudienne.jpg",
   },
 ]
 
@@ -196,7 +198,7 @@ export const menu: MenuType[] = [
   },
   {
     name: "Gestion clientèle",
-    link: "/dashboard/customers-page",
+    link: "/dashboard/customers",
     icon: User,
   },
   {
@@ -230,7 +232,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Pikine",
     image: "/images/Jonas.jpg"
   },
-   {
+  {
      id: 3,
     name: "Caleb Vogel",
     orders: 200,
@@ -239,7 +241,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Medina",
     image: "/images/Caleb Vogel.jpg"
   },
-   {
+  {
      id: 4,
     name: "THEODOR",
     orders: 350,
@@ -248,7 +250,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Guediawaye",
     image: "/images/Theodor.jpg"
   },
-   {
+  {
      id: 5,
     name: "JACK JEAN",
     orders: 450,
@@ -257,7 +259,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Thiaroy",
     image: "/images/Jack Jean.jpg"
   },
-   {
+  {
      id: 6,
     name: "LEONARD",
     orders: 360,
@@ -266,7 +268,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Rufisque",
     image: "/images/Leonard.jpg"
   },
-   {
+  {
      id: 7,
     name: "FRANCOIS",
     orders: 250,
@@ -275,7 +277,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Mbao",
     image: "/images/François.jpg"
   },
-   {
+  {
      id: 8,
     name: "ADRIEN",
     orders: 380,
@@ -284,7 +286,7 @@ export const initialCustomers: CustomerType[] = [
     address: "Grand Mbao",
     image: "/images/Adrien.jpg"
   },
-   {
+  {
      id: 9,
     name: "YANICK",
     orders: 470,
@@ -293,51 +295,51 @@ export const initialCustomers: CustomerType[] = [
     address: "Castor",
     image: "/images/Yanick.jpg"
   },
-   {
-     id: 9,
-    name: "YANICK",
-    orders: 470,
+  {
+     id: 10,
+    name: "Alex Alex",
+    orders: 250,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
+    image: "/images/Alex Alex.jpg"
   },
-   {
-     id: 9,
-    name: "YANICK",
-    orders: 470,
+  {
+     id: 11,
+    name: "Zidane",
+    orders: 170,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
+    image: "/images/Zidane.jpg"
   },
-   {
-     id: 9,
-    name: "YANICK",
-    orders: 470,
+  {
+     id: 12,
+    name: "Mendes",
+    orders: 420,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
+    image: "/images/Mendes.jpg"
   },
-   {
-     id: 9,
-    name: "YANICK",
-    orders: 470,
+  {
+     id: 13,
+    name: "Jules Junior",
+    orders: 270,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
+    image: "/images/Jules Junior.jpg"
   },
-   {
-     id: 9,
-    name: "YANICK",
-    orders: 470,
+  {
+     id: 14,
+    name: "Eduard",
+    orders: 370,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
-    image: "/images/Yanick.jpg"
-  }
+    image: "/images/Eduard.jpg"
+  },
 ]
 
 

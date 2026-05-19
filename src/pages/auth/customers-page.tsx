@@ -1,12 +1,32 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Trash2, Pencil, Plus, X } from "lucide-react"
 import { Link } from "react-router-dom"
 import type { CustomerType } from "@/types/auth"
 import { initialCustomers } from "@/lib/data"
 
+
 export default function CustomersPage() {
-  const [showDelete, setShowDelete] = useState<number | null>(null)
   const [customers, setCustomers] = useState<CustomerType[]>(initialCustomers)
+  const [showDelete, setShowDelete] = useState<number | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const itemsPerPage = 5
+  const totalPages = Math.ceil(customers.length / itemsPerPage)
+
+  const startIndex = (currentPage - 1) * itemsPerPage
+
+  const currentCustomers = customers.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  )
+
+  useEffect(() => {
+    const totalPages = Math.ceil(customers.length / itemsPerPage)
+
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1)
+    }
+  }, [customers, currentPage])
 
   const handleDelete = (id: number) => {
     setCustomers(customers.filter((item) => item.id !== id))
@@ -44,13 +64,13 @@ export default function CustomersPage() {
             </thead>
 
             <tbody>
-              {customers.map((item, index) => (
+              {currentCustomers.map((item, index) => (
                 <tr key={index} className="border-b font-semibold">
                   <td className="flex items-center gap-3 border-r p-4">
                     <img
                       src={item.image}
                       alt="image"
-                      className="h-12 w-12 object-cover rounded-lg"
+                      className="h-12 w-12 rounded-lg object-cover"
                     />
                     {item.name}
                   </td>
@@ -78,20 +98,55 @@ export default function CustomersPage() {
                         <span className="font-semibold">Edit</span>
                       </Link>
 
-                      <Trash2
-                        className="cursor-pointer text-primary"
-                        size={18}
+                      <div
                         onClick={() => setShowDelete(item.id)}
-                      />
-                      <span className="cursor-pointer font-semibold text-primary">
-                        Delete
-                      </span>
+                        className="flex cursor-pointer items-center gap-1 text-primary"
+                      >
+                        <Trash2 size={18} />
+
+                        <span className="font-semibold">Delete</span>
+                      </div>
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <div className="flex items-center justify-between px-6 py-4">
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))
+              }
+              className="rounded-lg border px-4 py-2 text-sm font-medium"
+            >
+              Previous
+            </button>
+
+            <div className="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index + 1)}
+                  className={`h-9 w-9 rounded-lg text-sm font-semibold ${
+                    currentPage === index + 1
+                      ? "bg-primary text-white"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
+              }
+              className="rounded-lg border px-4 py-2 text-sm font-medium"
+            >
+              Next
+            </button>
+          </div>
         </div>
 
         {showDelete !== null && (
