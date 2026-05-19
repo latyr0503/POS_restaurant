@@ -1,6 +1,5 @@
-
 import { menus } from "@/lib/data"
-import { X } from "lucide-react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import localforage from "localforage"
@@ -10,14 +9,21 @@ import CardProduit from "@/components/card-produit"
 import type { Menu } from "@/types/menu"
 
 export default function Dashboard() {
-  const [panier, setPanier] = useState<{ menu: Menu; quantite: number }[]>([])
+  const [panier, setPanier] = useState<{ menu: Menu }[]>([])
   const [recherche, setRecherche] = useState("")
   const navigate = useNavigate()
 
+  const [page, setPage] = useState(1)
+  const produitsParPage = 9
 
   const menusFiltres = menus.filter((menu) =>
     menu.nom.toLowerCase().includes(recherche.toLowerCase())
   )
+
+  const debut = (page - 1) * produitsParPage
+  const fin = debut + produitsParPage
+  const produitsPagines = menusFiltres.slice(debut, fin)
+  const totalPages = Math.ceil(menusFiltres.length / produitsParPage)
 
   const ajouterAuPanier = (menu: Menu) => {
     const existe = panier.find((item) => item.menu.id === menu.id)
@@ -25,12 +31,12 @@ export default function Dashboard() {
       setPanier(
         panier.map((item) =>
           item.menu.id === menu.id
-            ? { ...item, quantite: item.quantite + 1 }
+            ? { ...item, menu: { ...item.menu, quantity: item.menu.quantity ? item.menu.quantity + 1 : 1 } }
             : item
         )
       )
     } else {
-      setPanier([...panier, { menu, quantite: 1 }])
+      setPanier([...panier, { menu }])
     }
   }
 
@@ -38,26 +44,26 @@ export default function Dashboard() {
     setPanier(
       panier
         .map((item) =>
-          item.menu.id === id ? { ...item, quantite: item.quantite - 1 } : item
+          item.menu.id === id ? { ...item, menu: { ...item.menu, quantity: item.menu.quantity ? item.menu.quantity - 1 : 0 } } : item
         )
-        .filter((item) => item.quantite > 0)
+        .filter((item) => item.menu.quantity && item.menu.quantity > 0)
     )
   }
-  
+
   const validerCommande = async () => {
     await localforage.setItem("panier", panier)
     navigate("/dashboard/form-commande")
   }
 
   return (
-    <div className="flex flex-1 overflow-hidden">
-      <main className="flex-1 overflow-y-auto p-6">
-      <Header onRecherche={setRecherche} />
-        <h2 className="mb-6 text-2xl font-extrabold text-black">
+    <div className="flex flex-1 overflow-hidden h-screen">
+      <main className="flex-1 overflow-y-auto p-4">
+        <Header onRecherche={setRecherche} />
+        <h2 className="mb-4 text-2xl font-extrabold text-black">
           Special Menu
         </h2>
         <div className="grid grid-cols-3 gap-6">
-          {menusFiltres.map((menu: Menu) => (
+          {produitsPagines.map((menu: Menu) => (
             <CardProduit
               key={menu.id}
               menu={menu}
@@ -65,9 +71,28 @@ export default function Dashboard() {
             />
           ))}
         </div>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <button
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 hover:bg-gray-50 disabled:opacity-40"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <span className="text-sm text-gray-500">
+            Page {page} / {totalPages}
+          </span>
+          <button
+            onClick={() => setPage(page + 1)}
+            disabled={page === totalPages}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 hover:bg-gray-50 disabled:opacity-40"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
       </main>
 
-      <div className="flex w-80 flex-col mt-40">
+      <div className="flex h-full w-72 flex-col border-l border-gray-200 bg-white">
         {panier.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="text-center text-xl text-gray-400">
@@ -101,7 +126,7 @@ export default function Dashboard() {
                 <span>Subtotal</span>
                 <span>
                   {panier.reduce(
-                    (total, item) => total + item.menu.prix * item.quantite,
+                    (total, item) => total + item?.menu?.prix * item?.menu?.quantity,
                     0
                   )}{" "}
                   FCFA
@@ -112,7 +137,7 @@ export default function Dashboard() {
                 <span>
                   {Math.round(
                     panier.reduce(
-                      (total, item) => total + item.menu.prix * item.quantite,
+                      (total, item) => total + item?.menu?.prix * item?.menu?.quantity,
                       0
                     ) * 0.02
                   )}{" "}
@@ -127,12 +152,12 @@ export default function Dashboard() {
                 <span>Total</span>
                 <span>
                   {panier.reduce(
-                    (total, item) => total + item.menu.prix * item.quantite,
+                    (total, item) => total + item?.menu?.prix * item?.menu?.quantity,
                     0
                   ) +
                     Math.round(
                       panier.reduce(
-                        (total, item) => total + item.menu.prix * item.quantite,
+                        (total, item) => total + item?.menu?.prix * item?.menu?.quantity,
                         0
                       ) * 0.02
                     ) +
