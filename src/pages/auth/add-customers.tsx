@@ -42,6 +42,7 @@ export default function AddCustomers() {
     const url = URL.createObjectURL(file)
     setPreview(url)
   }
+  
 
   return (
     <div>

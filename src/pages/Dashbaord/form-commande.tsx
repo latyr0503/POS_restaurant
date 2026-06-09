@@ -9,6 +9,7 @@ import type { FormCommandeType, Menu } from "@/types/menu"
 import ModalImprimerComponent from "@/components/modal"
 
 
+
 export default function FormCommande() {
   const [headerVisible, setHeaderVisible] = useState(true)
   const [panier, setPanier] = useState<Menu[]>([])

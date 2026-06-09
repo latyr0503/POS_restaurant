@@ -37,3 +37,13 @@ export interface Article {
   menuId: number
   quantite: number
 }
+
+
+export interface FormParametres {
+  prenom: string
+  nom: string
+  email: string
+  telephone: string
+  dateNaissance: string
+  position: string
+}
