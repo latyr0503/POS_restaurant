@@ -147,7 +147,7 @@ export default function Manager() {
       {/* HEADER */}
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-[30px] font-bold text-[#1F2937]">
-          Manager Dashboard
+          Manager Dashboard (teste)
         </h1>
 
         <Tabs value={period} onValueChange={setPeriod}>
