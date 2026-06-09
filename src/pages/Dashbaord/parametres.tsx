@@ -113,7 +113,7 @@ export default function Parametres() {
             </DialogContent>
           </Dialog>
 
-          <p className="mt-2 font-bold text-black">Saul Goodmate</p>
+          <p className="mt-2 font-bold text-black">Saul latyr</p>
           <p className="text-sm text-gray-400">Manager</p>
         </div>
 
