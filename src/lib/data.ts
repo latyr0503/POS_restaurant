@@ -1,17 +1,7 @@
 import type { CustomerType, ProductType } from "@/types/auth"
-import type { Menu, MenuType } from "@/types/menu"
 import {Bell,FileText,Hamburger,House,LayoutDashboard,SendHorizontal,Settings,User} from "lucide-react"
 import type { FormCommandeType, Menu, MenuType } from "@/types/menu"
-import {
-  Bell,
-  FileText,
-  Hamburger,
-  House,
-  LayoutDashboard,
-  SendHorizontal,
-  Settings,
-  User,
-} from "lucide-react"
+
 
 export const initialProducts: ProductType[] = [
   {
@@ -356,7 +346,7 @@ export const menus: Menu[] = [
     nom: "Waffle",
     prix: 2500,
     note: 4.5,
-    description: "Gaufre croustillante, chantilly",
+    description: "Simple, gourmande et délicieusement croustillante",
     image: "/images/Waffle.jpeg",
     quantity: 1
   },
@@ -374,13 +364,13 @@ export const menus: Menu[] = [
     nom: "Jus d'Orange",
     prix: 1000,
     note: 4.1,
-    description: "Jus d'orange frais pressé",
+    description: "Toute la fraîcheur de l’orange dans un verre",
     image: "/images/Jus d'Orange.jpeg",
     quantity: 1
   },
   {
     id: 8,
-    nom: "Pizza Margherita",
+    nom: "Margherita",
     prix: 4000,
     note: 4.7,
     description: "Mozzarella, tomate, basilic frais",
@@ -392,7 +382,7 @@ export const menus: Menu[] = [
     nom: "Veggie Burger",
     prix: 2500,
     note: 4.0,
-    description: "Steak végétal, avocat, salade",
+    description: "Toute la gourmandise d’un burger, version végétale",
     image: "/images/Veggie Burger.jpeg",
     quantity: 1
   },
@@ -419,7 +409,7 @@ export const menus: Menu[] = [
     nom: "French Fries",
     prix: 1500,
     note: 4.6,
-    description: "Frites dorées, sel, ketchup",
+    description: "Des frites savoureuses préparées à la perfection",
     image: "/images/French Fries.jpeg",
     quantity: 1
   },
@@ -434,7 +424,7 @@ export const menus: Menu[] = [
   },
   {
     id: 14,
-    nom: "Cheese Sandwich",
+    nom: "Sandwich",
     prix: 2000,
     note: 3.8,
     description: "Pain grillé, cheddar fondu, jambon",
@@ -443,10 +433,10 @@ export const menus: Menu[] = [
   },
   {
     id: 15,
-    nom: "Sundae Chocolat",
+    nom: "Sundae-choco",
     prix: 1800,
     note: 4.6,
-    description: "Glace vanille, sauce chocolat",
+    description: "Une touche chocolatée irrésistible à chaque cuillère",
     image: "/images/Sundae Chocolat.jpeg",
     quantity: 1
   },
@@ -464,7 +454,7 @@ export const menus: Menu[] = [
     nom: "BBQ Burger",
     prix: 3000,
     note: 4.3,
-    description: "Burger au barbecue, cheddar, oignons caramélisés",
+    description: "Burger au barbecue,oignons caramélisés",
     image: "/images/BBQ Burger.jpeg",
     quantity: 1
   },
@@ -473,7 +463,7 @@ export const menus: Menu[] = [
     nom: "Apple Pie",
     prix: 2000,
     note: 4.4,
-    description: "Tarte aux pommes, glaçage",
+    description: "Tarte aux pommes, glaçage à une garniture généreuse",
     image: "/images/Apple Pie.jpeg",
     quantity: 1
   },

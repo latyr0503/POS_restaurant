@@ -18,6 +18,7 @@ import EditCustomer from "./pages/auth/edit-customer"
 import FormCommande from "./pages/Dashbaord/form-commande"
 import EditProduct from "./pages/auth/edit-product"
 import Commandes from "./pages/Dashbaord/commandes"
+import Parametres from "./pages/Dashbaord/parametres"
 
 export function App() {
 
@@ -55,7 +56,7 @@ export function App() {
             <Route path="edit-customer/:id" element={<EditCustomer />} />
             <Route path="notifications" element={<h1>notifications</h1>} />
             <Route path="history" element={<h1>history</h1>} />
-            <Route path="settings" element={<h1>settings</h1>} />
+            <Route path="settings" element={<Parametres />} />
           </Route>
 
           <Route element={<AuthLayout />}>
