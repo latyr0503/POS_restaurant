@@ -2,7 +2,6 @@ import type { CustomerType, ProductType } from "@/types/auth"
 import {Bell,FileText,Hamburger,House,LayoutDashboard,SendHorizontal,Settings,User} from "lucide-react"
 import type { FormCommandeType, Menu, MenuType } from "@/types/menu"
 
-
 export const initialProducts: ProductType[] = [
   {
     productid: `ID-${crypto.randomUUID()}`,

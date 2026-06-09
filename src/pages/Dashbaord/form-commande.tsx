@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import localforage from "localforage"
 import { toast } from "sonner"
 import OrderSuccess from "@/components/succes-page"
-import type { FormCommandeType, Menu } from "@/types/menu"
+import type { FormCommandeType, Menu  } from "@/types/menu"
 import ModalImprimerComponent from "@/components/modal"
 
 
@@ -29,9 +29,7 @@ export default function FormCommande() {
   useEffect(() => {
     localforage.getItem<{ menu: Menu }[] | Menu[]>("panier").then((data) => {
       if (data) {
-        // some parts of the app store panier as [{ menu: Menu }],
-        // so normalize to Menu[] for this component
-        const normalized = (data as any).map ? (data as any).map((d: any) => d.menu ?? d) : []
+        const normalized = (data as Menu[]).map ? (data as Menu[]).map((d: Menu) => d) : []
         setPanier(normalized)
       }
     })
