@@ -1,17 +1,7 @@
 import type { CustomerType, ProductType } from "@/types/auth"
 import type { Menu, MenuType } from "@/types/menu"
 import {Bell,FileText,Hamburger,House,LayoutDashboard,SendHorizontal,Settings,User} from "lucide-react"
-import type { FormCommandeType, Menu, MenuType } from "@/types/menu"
-import {
-  Bell,
-  FileText,
-  Hamburger,
-  House,
-  LayoutDashboard,
-  SendHorizontal,
-  Settings,
-  User,
-} from "lucide-react"
+import type { FormCommandeType } from "@/types/menu"
 
 export const initialProducts: ProductType[] = [
   {
@@ -137,25 +127,25 @@ export const initialProducts: ProductType[] = [
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    productname: "Recette Vermicelle",
+    productname: "C'est Bon",
     category: "Restaurant",
     productunit: 2,
     price: 2000,
     quantity: 20,
     status: "In Stock",
-    description: "Vermicelle, Poulet, Sauce",
-    image: "/images/Recette Vermicelle.jpg",
+    description: "Riz, Poisson, Sauce",
+    image: "/images/C'est Bon.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
-    productname: "Un dibi poulet",
-    category: "Fast Food",
+    productname: "Crêpe Sucrée",
+    category: "Crêperie",
     productunit: 2,
     price: 4000,
     quantity: 38,
     status: "In Stock",
     description: "Poulet, Oignon",
-    image: "/images/Un dibi poulet.jpg",
+    image: "/images/Crêpe Sucrée.jpg",
   },
   {
     productid: `ID-${crypto.randomUUID()}`,
@@ -189,7 +179,7 @@ export const menu: MenuType[] = [
   },
   {
     name: "Gestion des Menus",
-    link: "/dashboard/menus",
+    link: "/dashboard/manager",
     icon: LayoutDashboard,
   },
   {
@@ -226,7 +216,7 @@ export const menu: MenuType[] = [
 
 export const initialCustomers: CustomerType[] = [
   {
-    id: 1,
+    id:`ID-${crypto.randomUUID()}`,
     name: "SIMEON DAISE",
     orders: 150,
     gender: "Male",
@@ -235,7 +225,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/SIMEON DAISE.jpg",
   },
   {
-    id: 2,
+    id: `ID-${crypto.randomUUID()}`,
     name: "Jonas",
     orders: 250,
     gender: "Male",
@@ -244,7 +234,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Jonas.jpg",
   },
   {
-    id: 3,
+    id:`ID-${crypto.randomUUID()}`,
     name: "Caleb Vogel",
     orders: 200,
     gender: "Male",
@@ -253,7 +243,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Caleb Vogel.jpg",
   },
   {
-    id: 4,
+    id:`ID-${crypto.randomUUID()}`,
     name: "THEODOR",
     orders: 350,
     gender: "Male",
@@ -262,7 +252,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Theodor.jpg",
   },
   {
-    id: 5,
+    id:`ID-${crypto.randomUUID()}`,
     name: "JACK JEAN",
     orders: 450,
     gender: "Male",
@@ -271,7 +261,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Jack Jean.jpg",
   },
   {
-    id: 6,
+    id:`ID-${crypto.randomUUID()}`,
     name: "LEONARD",
     orders: 360,
     gender: "Male",
@@ -280,7 +270,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Leonard.jpg",
   },
   {
-    id: 7,
+    id:`ID-${crypto.randomUUID()}`,
     name: "FRANCOIS",
     orders: 250,
     gender: "Male",
@@ -289,7 +279,7 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/François.jpg",
   },
   {
-    id: 8,
+    id: `ID-${crypto.randomUUID()}`,
     name: "ADRIEN",
     orders: 380,
     gender: "Male",
@@ -298,13 +288,58 @@ export const initialCustomers: CustomerType[] = [
     image: "/images/Adrien.jpg",
   },
   {
-    id: 9,
+    id: `ID-${crypto.randomUUID()}`,
     name: "YANICK",
     orders: 470,
     gender: "Male",
     spent: "3300 FCFA",
     address: "Castor",
     image: "/images/Yanick.jpg",
+  },
+   {
+    id: `ID-${crypto.randomUUID()}`,
+    name: "Alex Alex",
+    orders: 410,
+    gender: "Male",
+    spent: "2300 FCFA",
+    address: "Sébikhotane",
+    image: "/images/Alex Alex.jpg",
+  },
+   {
+    id: `ID-${crypto.randomUUID()}`,
+    name: "Eduard",
+    orders: 170,
+    gender: "Male",
+    spent: "1300 FCFA",
+    address: "Diamalaye",
+    image: "/images/Eduard.jpg",
+  },
+   {
+    id: `ID-${crypto.randomUUID()}`,
+    name: "Mendes",
+    orders: 390,
+    gender: "Male",
+    spent: "2800 FCFA",
+    address: "Apix",
+    image: "/images/Mendes.jpg",
+  },
+   {
+    id: `ID-${crypto.randomUUID()}`,
+    name: "Zidane",
+    orders: 220,
+    gender: "Male",
+    spent: "1900 FCFA",
+    address: "Yeumbeul",
+    image: "/images/Zidane.jpg",
+  },
+    {
+    id: `ID-${crypto.randomUUID()}`,
+    name: "Jules Junior",
+    orders: 420,
+    gender: "Male",
+    spent: "2900 FCFA",
+    address: "Diamagueune",
+    image: "/images/Jules Junior.jpg",
   },
 ]
 
@@ -575,7 +610,7 @@ export const commandes:FormCommandeType[] = [
     paiement: "Espèces",
     menu: menus.filter((item) => [1, 2, 3, 4].includes(item.id)),
   },
-    {
+  {
     customerId: `ID-${crypto.randomUUID()}`,
     nom: 'Latyr SENE',
     genre: 'Male',
@@ -589,7 +624,7 @@ export const commandes:FormCommandeType[] = [
     paiement: "Espèces",
     menu: menus.filter((item) => [4, 5, 6].includes(item.id)),
   },
-    {
+  {
     customerId: `ID-${crypto.randomUUID()}`,
     nom: 'Latyr SENE',
     genre: 'Male',
@@ -603,7 +638,7 @@ export const commandes:FormCommandeType[] = [
     paiement: "Espèces",
     menu: menus.filter((item) => [7,8,9].includes(item.id)),
   },
-    {
+  {
     customerId: `ID-${crypto.randomUUID()}`,
     nom: 'Latyr SENE',
     genre: 'Male',
@@ -617,7 +652,7 @@ export const commandes:FormCommandeType[] = [
     paiement: "Espèces",
     menu: menus.filter((item) => [10, 11].includes(item.id)),
   },
-    {
+  {
     customerId: `ID-${crypto.randomUUID()}`,
     nom: 'Latyr SENE',
     genre: 'Male',

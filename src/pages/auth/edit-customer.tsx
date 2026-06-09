@@ -8,7 +8,7 @@ import { initialCustomers } from "@/lib/data"
 export default function EditCustomer() {
   const { id } = useParams()
   const [customers, setCustomers] = useState<CustomerType[]>(initialCustomers)
-  const customer = customers.find((item) => item.id === Number(id))
+  const customer = customers.find((item) => item.id === String(id))
   if (!customer) {
     return <h1 className="p-10 text-xl">Customer not found</h1>
   }
@@ -47,7 +47,7 @@ export default function EditCustomer() {
     e.preventDefault()
 
     const updatedCustomers = customers.map((item) =>
-      item.id === Number(id)
+      item.id === String(id)
         ? {
             ...item,
             ...form,
