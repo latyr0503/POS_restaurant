@@ -7,7 +7,7 @@ import { initialCustomers } from "@/lib/data"
 
 export default function CustomersPage() {
   const [customers, setCustomers] = useState<CustomerType[]>(initialCustomers)
-  const [showDelete, setShowDelete] = useState<number | null>(null)
+  const [showDelete, setShowDelete] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
 
   const itemsPerPage = 5
@@ -28,7 +28,7 @@ export default function CustomersPage() {
     }
   }, [customers, currentPage])
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     setCustomers(customers.filter((item) => item.id !== id))
 
     setShowDelete(null)

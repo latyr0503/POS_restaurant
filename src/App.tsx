@@ -18,6 +18,7 @@ import EditCustomer from "./pages/auth/edit-customer"
 import FormCommande from "./pages/Dashbaord/form-commande"
 import EditProduct from "./pages/auth/edit-product"
 import Commandes from "./pages/Dashbaord/commandes"
+import Manager from "./pages/Dashbaord/manager"
 
 export function App() {
 
@@ -34,21 +35,11 @@ export function App() {
             <Route path="product" element={<Product />} />
             <Route path="add-product" element={<AddProduct />} />
             <Route path="edit-product/:id" element={<EditProduct />} />
-            <Route path="menus" element={<h1>menus</h1>} />
+            <Route path="manager" element={<Manager/>} />
             <Route path="sales" element={<h1>sales</h1>} />
-            <Route
-              path="customers"
-              element={
-                <CustomersPage/>
-              }
-            />
+            <Route path="customers" element={<CustomersPage/>} />
             <Route path="add-customers" element={<AddCustomers />} />
-            <Route
-              path="edit-customer/:id"
-              element={
-                <EditCustomer/>
-              }
-            />
+            <Route path="edit-customer/:id" element={<EditCustomer/>} />
             <Route path="sales" element={<Commandes />} />  
             <Route path="customers-page" element={<CustomersPage />} />
             <Route path="add-customers" element={<AddCustomers />} />

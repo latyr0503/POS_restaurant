@@ -18,6 +18,7 @@ export interface FormRegister extends FormLogin {
 export interface ProductType {
   productid: string
   productname: string
+  orders?: number
   category: string
   productunit: number
   price: number
@@ -28,7 +29,7 @@ export interface ProductType {
 }
 
 export interface CustomerType {
-   id: number
+   id: string
   name: string
   orders: number
   gender: string
