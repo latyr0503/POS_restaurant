@@ -65,9 +65,9 @@ export default function Parametres() {
   }
 
   return (
-    <div className="flex flex-1 gap-6 overflow-hidden bg-gray-50 p-6">
+    <div className="flex flex-1 flex-col md:flex-row gap-4 md:gap-6 overflow-y-auto md:overflow-hidden bg-gray-50 p-4 md:p-6">
       {/* Carte gauche */}
-      <div className="flex w-72 shrink-0 flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div className="flex w-full md:w-72 shrink-0 flex-col rounded-2xl border border-gray-100 bg-white p-4 md:p-6 shadow-sm">
         {/* Profil */}
         <div className="mb-6 flex flex-col items-center gap-2">
           <Dialog>
@@ -147,7 +147,7 @@ export default function Parametres() {
       </div>
 
       {/* Zone de contenu */}
-      <div className="flex-1 overflow-y-auto rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+      <div className="flex-1 overflow-y-auto rounded-2xl border border-gray-100 bg-white p-4 sm:p-8 shadow-sm">
         {section === "personal" && (
           <div>
             <h3 className="mb-1 text-xl font-extrabold text-black">
@@ -157,7 +157,7 @@ export default function Parametres() {
               Modifiez les informations de votre profil et mettez à jour les détails de votre compte.
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <Label className="mb-1 block text-sm font-medium text-gray-700">
                   Prénom

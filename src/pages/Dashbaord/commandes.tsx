@@ -1,4 +1,4 @@
-import { commandes, menus } from "@/lib/data"
+import { commandes } from "@/lib/data"
 import type { FormCommandeType } from "@/types/menu"
 import { useState } from "react"
 import OrderSuccess from "@/components/succes-page"
@@ -26,9 +26,9 @@ export default function Commandes() {
   }
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 flex-col md:flex-row">
       {/* Colonne gauche */}
-      <div className="w-96 border-r border-gray-200 bg-white p-4">
+      <div className="w-full shrink-0 md:w-96 border-b md:border-b-0 md:border-r border-gray-200 bg-white p-4">
         <h2 className="mb-1 text-xl font-extrabold text-black">
           Commande en attente
         </h2>
@@ -75,7 +75,7 @@ export default function Commandes() {
       </div>
 
       {/* Colonne droite */}
-      <div className="flex flex-1 flex-col bg-gray-50 p-6">
+      <div className="flex flex-1 flex-col bg-gray-50 p-4 sm:p-6">
         {!commandeSelectionnee ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="text-gray-400">Aucun détail de la commande</p>
@@ -83,7 +83,7 @@ export default function Commandes() {
         ) : (
           <>
             {/* Header */}
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
               <h2 className="text-xl font-extrabold text-black">
                 Order #{commandeSelectionnee.customerId}
               </h2>
@@ -95,7 +95,7 @@ export default function Commandes() {
             </div>
 
             {/* Details */}
-            <div className="mb-6 grid grid-cols-4 gap-4 rounded-xl bg-white p-4">
+            <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-xl bg-white p-4">
               <div>
                 <p className="text-xs text-gray-400">N. de table</p>
                 <p className="font-bold text-black">
@@ -120,29 +120,24 @@ export default function Commandes() {
             {/* Articles */}
             <p className="mb-3 font-bold text-black">commande</p>
             <div className="flex-1 space-y-3 overflow-y-auto">
-              {commandeSelectionnee.menu.map((article, index) => {
-                const menu = menus.find((m) => m.id === article.id)
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between rounded-xl bg-white p-3"
-                  >
-                    {menu && (
-                      <img
-                        src={menu.image}
-                        alt={menu.nom}
-                        className="h-14 w-14 rounded-lg object-cover"
-                      />
-                    )}
-                    <span className="flex-1 px-3 font-semibold text-black">
-                      {menu?.nom} x {article.quantity}
-                    </span>
-                    <span className="font-bold text-primary">
-                      {menu ? menu.prix * article.quantity : 0} FCFA
-                    </span>
-                  </div>
-                )
-              })}
+              {commandeSelectionnee.menu.map((article, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between rounded-xl bg-white p-3"
+                >
+                  <img
+                    src={article.image}
+                    alt={article.nom}
+                    className="h-14 w-14 rounded-lg object-cover"
+                  />
+                  <span className="flex-1 px-3 font-semibold text-black">
+                    {article.nom} x {article.quantity}
+                  </span>
+                  <span className="font-bold text-primary">
+                    {article.prix * article.quantity} FCFA
+                  </span>
+                </div>
+              ))}
             </div>
             <div className="flex">
               {/* Bouton Print Invoice */}

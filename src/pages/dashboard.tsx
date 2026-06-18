@@ -56,13 +56,13 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-1 overflow-hidden h-screen">
-      <main className="flex-1 overflow-y-auto p-4">
+    <div className="flex flex-1 flex-col overflow-hidden h-screen md:flex-row">
+      <main className="order-1 flex-1 overflow-y-auto p-4">
         <Header onRecherche={setRecherche} />
         <h2 className="mb-4 text-2xl font-extrabold text-black">
           Special Menu
         </h2>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {produitsPagines.map((menu: Menu) => (
             <CardProduit
               key={menu.id}
@@ -92,9 +92,11 @@ export default function Dashboard() {
         </div>
       </main>
 
-      <div className="flex h-full w-72 flex-col border-l border-gray-200 bg-white">
+      <div
+        className={`order-2 ${panier.length === 0 ? "hidden md:flex" : "flex"} h-auto w-full flex-col border-t border-gray-200 bg-white md:h-full md:w-72 md:border-t-0 md:border-l`}
+      >
         {panier.length === 0 ? (
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex flex-1 items-center justify-center py-12">
             <p className="text-center text-xl text-gray-400">
               + <br /> Ajouter un produit
               <br />

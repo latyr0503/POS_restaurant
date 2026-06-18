@@ -5,10 +5,8 @@ import { useEffect, useState } from "react"
 import localforage from "localforage"
 import { toast } from "sonner"
 import OrderSuccess from "@/components/succes-page"
-import type { FormCommandeType, Menu  } from "@/types/menu"
+import type { FormCommandeType, Menu } from "@/types/menu"
 import ModalImprimerComponent from "@/components/modal"
-
-
 
 export default function FormCommande() {
   const [headerVisible, setHeaderVisible] = useState(true)
@@ -27,9 +25,9 @@ export default function FormCommande() {
   })
 
   useEffect(() => {
-    localforage.getItem<{ menu: Menu }[] | Menu[]>("panier").then((data) => {
+    localforage.getItem<{ menu: Menu }[]>("panier").then((data) => {
       if (data) {
-        const normalized = (data as Menu[]).map ? (data as Menu[]).map((d: Menu) => d) : []
+        const normalized = data.map((d) => d.menu)
         setPanier(normalized)
       }
     })
@@ -75,24 +73,23 @@ export default function FormCommande() {
   const handlePrint = () => {
     setIsPrint(true)
     setHeaderVisible(false)
-    window.print();
+    window.print()
   }
-    const subtotal = panier.reduce(
+  const subtotal = panier.reduce(
     (total, item) => total + item.prix * item.quantity,
     0
   )
   const tax = Math.round(subtotal * 0.02)
   const total = subtotal + tax + 200
 
-
   return (
     <div>
       {headerVisible ? (
-        <div className="flex h-screen flex-col bg-white p-8">
+        <div className="flex h-screen flex-col overflow-y-auto bg-white p-4 sm:p-8">
           <h2 className="mb-6 text-2xl font-extrabold text-black">
             Order {form.customerId.slice(0, 5).toUpperCase()}
           </h2>
-          <div className="mb-6 grid grid-cols-3 gap-4">
+          <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <label className="text-md font-semibold text-black">
                 Recipient
@@ -164,7 +161,7 @@ export default function FormCommande() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-1 gap-32">
+          <div className="mt-6 flex flex-1 flex-col gap-6 lg:flex-row lg:gap-32">
             <div className="flex-1 space-y-3">
               {panier.map((item, index) => (
                 <div
@@ -195,7 +192,7 @@ export default function FormCommande() {
               ))}
             </div>
 
-            <div className="w-52 space-y-7">
+            <div className="w-full space-y-7 lg:w-52">
               <div className="flex justify-between text-lg font-bold text-black">
                 <span>Subtotal</span>
                 <span>{subtotal} FCFA</span>
@@ -212,7 +209,7 @@ export default function FormCommande() {
                 <span>Total</span>
                 <span>{total} FCFA</span>
               </div>
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col gap-3 pt-4 sm:flex-row">
                 <ModalImprimerComponent
                   adresse={form.adresse}
                   customerId={form.customerId}
@@ -252,4 +249,3 @@ export default function FormCommande() {
     </div>
   )
 }
-

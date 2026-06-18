@@ -37,7 +37,6 @@ export function App() {
             <Route path="add-product" element={<AddProduct />} />
             <Route path="edit-product/:id" element={<EditProduct />} />
             <Route path="manager" element={<Manager/>} />
-            <Route path="sales" element={<h1>sales</h1>} />
             <Route path="customers" element={<CustomersPage/>} />
             <Route path="add-customers" element={<AddCustomers />} />
             <Route path="edit-customer/:id" element={<EditCustomer/>} />
